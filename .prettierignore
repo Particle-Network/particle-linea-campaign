@@ -1,0 +1,17 @@
+node_modules
+.github
+.parcel-cache
+.next
+
+build
+dist
+docs
+lib
+out
+
+*.svg
+
+dev_deploy
+staging_deploy
+production_deploy
+
