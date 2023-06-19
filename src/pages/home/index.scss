@@ -498,6 +498,12 @@ body {
     .btn-connect {
         width: 360px;
         margin-top: 20px;
+        &.btn-connect-mobile {
+            display: none;
+        }
+        &.btn-connect-pc {
+            display: flex;
+        }
     }
 }
 
@@ -704,13 +710,23 @@ body {
         }
     }
     .completedContainer {
+        .congratulations {
+            font-size: 38px;
+        }
         .btn-more {
             width: 320px;
         }
     }
     .connectContainer {
         .btn-connect {
-            width: 240px;
+            width: 260px;
+            &.btn-connect-mobile {
+                display: flex;
+                padding-top: 4px !important;
+            }
+            &.btn-connect-pc {
+                display: none;
+            }
         }
     }
     .claimContainer {

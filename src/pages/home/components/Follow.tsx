@@ -28,7 +28,23 @@ const Index = (props: IProps) => {
             </div>
             <div>
                 <Button
-                    className="btn-connect"
+                    className="btn-connect btn-connect-mobile"
+                    type="primary"
+                    loading={loading}
+                    href="https://twitter.com/ParticleNtwrk"
+                    onClick={() => {
+                        setLoading(true);
+                        setTimeout(() => {
+                            setLoading(false);
+                            props.onSuccess();
+                        }, 3e3);
+                    }}
+                >
+                    <span className="btn-text">Follow @ParticleNtwrk</span>
+                    <ArrowRightOutlined />
+                </Button>
+                <Button
+                    className="btn-connect btn-connect-pc"
                     type="primary"
                     loading={loading}
                     onClick={() => {
