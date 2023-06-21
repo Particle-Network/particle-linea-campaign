@@ -1,6 +1,6 @@
 {
     "name": "particle-linea-campaign",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "private": true,
     "dependencies": {
         "@account-abstraction/contracts": "^0.6.0",

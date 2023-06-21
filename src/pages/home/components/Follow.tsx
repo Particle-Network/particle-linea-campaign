@@ -37,7 +37,7 @@ const Index = (props: IProps) => {
                         setTimeout(() => {
                             setLoading(false);
                             props.onSuccess();
-                        }, 15e3);
+                        }, 10e3);
                     }}
                 >
                     <span className="btn-text">Follow @ParticleNtwrk</span>
@@ -53,7 +53,7 @@ const Index = (props: IProps) => {
                         setTimeout(() => {
                             setLoading(false);
                             props.onSuccess();
-                        }, 15e3);
+                        }, 10e3);
                     }}
                 >
                     <span className="btn-text">Follow @ParticleNtwrk</span>
