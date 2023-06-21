@@ -70,7 +70,7 @@ const Index = (props: IProps) => {
     };
 
     useEffect(() => {
-        if (connected && currentStep === 2) {
+        if (connected && currentStep === 3) {
             pimlico
                 .getSenderAddress()
                 .then((address) => pimlico.getTUSDCBalance(address))
