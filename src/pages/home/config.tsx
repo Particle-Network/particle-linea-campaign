@@ -12,6 +12,9 @@ export const isDevelopment = !!window.location.port;
 
 export const StepsItems = [
     {
+        title: 'Follow Particle Twitter',
+    },
+    {
         title: 'Connect with Particle',
     },
     {
@@ -21,14 +24,16 @@ export const StepsItems = [
         title: 'Swap tUSDC to tUSDT',
     },
     {
-        title: 'Follow Particle Twitter',
-    },
-    {
         title: 'Completed',
     },
 ];
 
 export const ComponentItems = [
+    {
+        label: 'Follow',
+        key: 'follow',
+        Component: Follow,
+    },
     {
         label: 'Connect',
         key: 'connect',
@@ -43,11 +48,6 @@ export const ComponentItems = [
         label: 'Swap',
         key: 'swap',
         Component: Swap,
-    },
-    {
-        label: 'Follow',
-        key: 'follow',
-        Component: Follow,
     },
     {
         label: 'Completed',

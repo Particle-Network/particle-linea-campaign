@@ -20,7 +20,7 @@ const Index = () => {
 
     useEffect(() => {
         if (particle.auth.isLogin()) {
-            setCurrentStep(localStorage.getItem(`completed_${particle.auth.userInfo()?.uuid}`) ? 4 : 1);
+            setCurrentStep(localStorage.getItem(`completed_${particle.auth.userInfo()?.uuid}`) ? 4 : 2);
         }
         setLoading(false);
     }, [setCurrentStep, setLoading]);
@@ -48,7 +48,7 @@ const Index = () => {
     const onConnect = async () => {
         try {
             await connect();
-            setCurrentStep(localStorage.getItem(`completed_${particle.auth.userInfo()?.uuid}`) ? 4 : 1);
+            setCurrentStep(localStorage.getItem(`completed_${particle.auth.userInfo()?.uuid}`) ? 4 : 2);
         } catch (error: any) {
             console.log('connect error', error);
             if (error.message) {
@@ -122,13 +122,13 @@ const Index = () => {
                     </span>
                     <span className="header-text">About Particle Network</span>
                 </a>
-                {!connected && (
+                {currentStep !== 0 && !connected && (
                     <Button className="btn-connect-action" type="primary" onClick={onConnect}>
                         <span className="btn-linear-text">Connect</span>
                     </Button>
                 )}
 
-                {connected && address && (
+                {currentStep !== 0 && connected && address && (
                     <Popover placement="bottom" content={content} trigger="click">
                         <Button className="btn-connect-action" type="primary">
                             <span className="btn-linear-text">{`${address.slice(0, 5)}...${address.slice(-5)}`}</span>
