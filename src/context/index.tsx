@@ -1,9 +1,9 @@
 import type { UserInfo } from '@particle-network/auth';
 import { AuthTypes, ParticleNetwork } from '@particle-network/auth';
+import { opBNBTestnet } from '@particle-network/chains';
 import { ParticleProvider } from '@particle-network/provider';
-import { ethers } from 'ethers';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import PimlicoAccount from '../utils/pimlico';
+import AAHelper from '../utils/aaHelper';
 
 window.__PARTICLE_ENVIRONMENT__ = process.env.REACT_APP_PARTICLE_ENV;
 
@@ -11,8 +11,8 @@ interface GlobalState {
     particle: ParticleNetwork;
     connect: () => Promise<UserInfo>;
     disconnect: () => Promise<void>;
-    provider: ethers.providers.Web3Provider;
-    pimlico: PimlicoAccount;
+    provider: ParticleProvider;
+    aaHelper: AAHelper;
     connected: boolean;
 }
 
@@ -28,8 +28,8 @@ export const GlobalContextProvider = (props: any) => {
             projectId: process.env.REACT_APP_PROJECT_ID as string,
             clientKey: process.env.REACT_APP_CLIENT_KEY as string,
             appId: process.env.REACT_APP_APP_ID as string,
-            chainName: 'Linea',
-            chainId: 59140,
+            chainName: opBNBTestnet.name,
+            chainId: opBNBTestnet.id,
             wallet: {
                 displayWalletEntry: false,
             },
@@ -37,7 +37,7 @@ export const GlobalContextProvider = (props: any) => {
     }, []);
 
     const provider = useMemo(() => {
-        return new ethers.providers.Web3Provider(new ParticleProvider(particle.auth), 'any');
+        return new ParticleProvider(particle.auth);
     }, [particle]);
 
     const connect = useCallback(async () => {
@@ -50,7 +50,7 @@ export const GlobalContextProvider = (props: any) => {
         await particle.auth.logout(true);
     }, [particle]);
 
-    const pimlico = useMemo(() => new PimlicoAccount(provider), [provider]);
+    const aaHelper = useMemo(() => new AAHelper(provider), [provider]);
 
     useEffect(() => {
         setConnected(particle.auth.isLogin());
@@ -69,7 +69,7 @@ export const GlobalContextProvider = (props: any) => {
     }, [particle]);
 
     return (
-        <GlobalContext.Provider value={{ particle, connect, disconnect, provider, pimlico, connected }}>
+        <GlobalContext.Provider value={{ particle, connect, disconnect, provider, aaHelper, connected }}>
             {props.children}
         </GlobalContext.Provider>
     );

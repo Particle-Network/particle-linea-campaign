@@ -1,10 +1,11 @@
+import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
-import usePimlico from '@/context/hooks/usePimlico';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { opBNBTestnet } from '@particle-network/chains';
 import { Button, Typography, message, notification } from 'antd';
 import React, { useEffect, useState } from 'react';
 
-const { Paragraph, Text } = Typography;
+const { Text } = Typography;
 
 interface IProps {
     style: React.CSSProperties;
@@ -16,8 +17,8 @@ const Index = (props: IProps) => {
     const [balance, setBalance] = useState('0.0');
     const [loading, setLoading] = useState(false);
     const [address, setAddress] = useState<string>();
-    const { provider, connected } = useParticle();
-    const { pimlico } = usePimlico();
+    const { connected } = useParticle();
+    const { aaHelper } = useAAHelper();
     const { currentStep } = props;
 
     const handleClick = async () => {
@@ -25,19 +26,13 @@ const Index = (props: IProps) => {
 
         try {
             if (Number(balance) < 1) {
-                const userOp = await pimlico.createMintTUSDCOp();
-                const userOpHash = await pimlico.hashUserOp(userOp);
-                console.log('userOpHash', userOpHash);
-                const signature = await provider.getSigner().signMessage(userOpHash);
-                userOp.signature = signature;
-                console.log('userOp', userOp);
-                const txHash = await pimlico.sendUserOp(userOp);
-                console.log(`UserOperation included: https://goerli.lineascan.build/tx/${txHash}`);
+                const txHash = await aaHelper.mintTUSDC();
+                console.log(`UserOperation included: ${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`);
                 notification.success({
                     message: 'Claim tUSDC Success',
                     description: 'Click for more details',
                     onClick: () => {
-                        window.open(`https://goerli.lineascan.build/tx/${txHash}`, '_blank');
+                        window.open(`${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
                     },
                 });
             }
@@ -59,10 +54,10 @@ const Index = (props: IProps) => {
     const getBalance = async () => {
         console.log('getBalance started');
         try {
-            const senderAddress = await pimlico.getSenderAddress();
+            const senderAddress = await aaHelper.getAddress();
             setAddress(senderAddress);
             console.log('senderAddress', senderAddress);
-            const balance = await pimlico.getTUSDCBalance(senderAddress);
+            const balance = await aaHelper.getTUSDCBalance(senderAddress);
             console.log('balance', balance.toString());
             setBalance(balance.toString());
             if (Number(balance) >= 1) {
@@ -78,7 +73,7 @@ const Index = (props: IProps) => {
         if (connected) {
             getBalance();
         }
-    }, [pimlico, connected]);
+    }, [aaHelper, connected]);
 
     useEffect(() => {
         if (currentStep === 0) {
@@ -97,7 +92,7 @@ const Index = (props: IProps) => {
             <div
                 className="address-value"
                 onClick={() => {
-                    window.open(`https://goerli.lineascan.build/address/${address}`, '_blank');
+                    window.open(`${opBNBTestnet.blockExplorerUrl}/address/${address}`, '_blank');
                 }}
             >
                 {address || ''}

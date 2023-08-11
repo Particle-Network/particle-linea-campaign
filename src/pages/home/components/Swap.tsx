@@ -1,6 +1,7 @@
+import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
-import usePimlico from '@/context/hooks/usePimlico';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { opBNBTestnet } from '@particle-network/chains';
 import { Button, Input, Modal, message, notification } from 'antd';
 import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react';
@@ -21,8 +22,8 @@ const Index = (props: IProps) => {
     const [swapComplete, setSwapComplete] = useState(false);
     const [visibleError, setVisibleError] = useState(false);
     const [txHash, setTXHash] = useState<string>();
-    const { provider, connected } = useParticle();
-    const { pimlico } = usePimlico();
+    const { connected } = useParticle();
+    const { aaHelper } = useAAHelper();
 
     const { currentStep } = props;
 
@@ -38,20 +39,14 @@ const Index = (props: IProps) => {
         setHintModal(false);
         setLoading(true);
         try {
-            const userOp = await pimlico.swapToken(receiverAddress);
-            const userOpHash = await pimlico.hashUserOp(userOp);
-            console.log('userOpHash', userOpHash);
-            const signature = await provider.getSigner().signMessage(userOpHash);
-            userOp.signature = signature;
-            console.log('userOp', userOp);
-            const txHash = await pimlico.sendUserOp(userOp);
+            const txHash = await aaHelper.swapToken(receiverAddress);
             setTXHash(txHash);
-            console.log(`UserOperation included: https://goerli.lineascan.build/tx/${txHash}`);
+            console.log(`UserOperation included: ${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`);
             notification.success({
                 message: 'Swap Success',
                 description: 'Click for more details',
                 onClick: () => {
-                    window.open(`https://goerli.lineascan.build/tx/${txHash}`, '_blank');
+                    window.open(`${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
                 },
             });
             await refreshBalance(receiverAddress);
@@ -71,13 +66,13 @@ const Index = (props: IProps) => {
 
     useEffect(() => {
         if (connected && currentStep === 3) {
-            pimlico
-                .getSenderAddress()
-                .then((address) => pimlico.getTUSDCBalance(address))
+            aaHelper
+                .getAddress()
+                .then((address) => aaHelper.getTUSDCBalance(address))
                 .then((result) => setUSDCBalance(result))
                 .catch((e) => console.error(e));
         }
-    }, [pimlico, connected, currentStep]);
+    }, [aaHelper, connected, currentStep]);
 
     useEffect(() => {
         if (currentStep === 0) {
@@ -93,10 +88,10 @@ const Index = (props: IProps) => {
 
     const refreshBalance = async (receiverAddress: string) => {
         try {
-            const senderAddress = await pimlico.getSenderAddress();
+            const senderAddress = await aaHelper.getAddress();
             await Promise.all([
-                pimlico.getTUSDCBalance(senderAddress).then((result) => setUSDCBalance(result)),
-                pimlico.getTUSDTBalance(receiverAddress).then((result) => setUSDTBalance(result)),
+                aaHelper.getTUSDCBalance(senderAddress).then((result) => setUSDCBalance(result)),
+                aaHelper.getTUSDTBalance(receiverAddress).then((result) => setUSDTBalance(result)),
             ]);
         } catch (error) {
             //ignore
@@ -125,7 +120,7 @@ const Index = (props: IProps) => {
                         className="btn-check-tx"
                         type="text"
                         onClick={() => {
-                            window.open(`https://goerli.lineascan.build/tx/${txHash}`, '_blank');
+                            window.open(`${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
                         }}
                     >
                         Check Transaction Here
@@ -166,7 +161,7 @@ const Index = (props: IProps) => {
                 footer={null}
             >
                 <p className="hint-content">
-                    Are you sure the recipient address is the address for the Linea Voyage on Galxe?
+                    Are you sure the recipient address is the address for the opBNB Odyssey on Galxe?
                 </p>
                 <p className="hint-address">{address}</p>
 

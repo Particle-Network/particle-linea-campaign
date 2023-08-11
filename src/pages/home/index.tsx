@@ -1,5 +1,5 @@
+import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
-import usePimlico from '@/context/hooks/usePimlico';
 import { DownOutlined, HeartTwoTone } from '@ant-design/icons';
 import { Button, Popover, Steps, message } from 'antd';
 import classNames from 'classnames';
@@ -7,7 +7,8 @@ import React, { useEffect, useState } from 'react';
 import type { OpaqueConfig, PlainStyle } from 'react-motion';
 import { Motion, spring } from 'react-motion';
 import { ComponentHeight, ComponentItems, SpringSettings, StepsItems, isDevelopment } from './config';
-import { IZumi, Linea, Logo, Pimlico } from './icons';
+import { IZumi, Logo } from './icons';
+import { opBNBTestnet } from '@particle-network/chains';
 import './index.scss';
 
 const Index = () => {
@@ -16,7 +17,7 @@ const Index = () => {
     const [address, setAddress] = useState<string>();
 
     const { particle, connected, connect, disconnect } = useParticle();
-    const { pimlico } = usePimlico();
+    const { aaHelper } = useAAHelper();
 
     useEffect(() => {
         if (particle.auth.isLogin()) {
@@ -34,8 +35,8 @@ const Index = () => {
 
     useEffect(() => {
         if (connected) {
-            pimlico
-                .getSenderAddress()
+            aaHelper
+                .getAddress()
                 .then((address) => {
                     setAddress(address);
                 })
@@ -43,7 +44,7 @@ const Index = () => {
         } else {
             setAddress(undefined);
         }
-    }, [pimlico, connected]);
+    }, [aaHelper, connected]);
 
     const onConnect = async () => {
         try {
@@ -74,7 +75,7 @@ const Index = () => {
     };
 
     const onScan = () => {
-        const scanUrl = `https://goerli.lineascan.build/address/${address}`;
+        const scanUrl = `${opBNBTestnet.blockExplorerUrl}/address/${address}`;
         window.open(scanUrl, '_blank');
     };
 
@@ -138,10 +139,10 @@ const Index = () => {
                 )}
             </div>
             <div className="header">
-                <div className="title">Particle @ Linea Voyage</div>
+                <div className="title">Particle @ opBNB Odyssey</div>
                 <div className="subtitle">
-                    Powered by Consensys, Linea is a developer-ready zk rollup designed for scaling and accelerating
-                    Ethereum dApps
+                    The opBNB network is the Layer 2 scaling solution for the BNB Smart Chain powered by bedrock version
+                    of Optimism OP Stack.
                 </div>
             </div>
             <div className="main">
@@ -192,14 +193,11 @@ const Index = () => {
                 </div>
                 <div className="thanks">
                     <span>And many thanks to our friends at</span>
-                    <a href="https://linea.build/" target="_blank">
-                        <Linea />
+                    <a href="https://opbnb.bnbchain.org/" target="_blank">
+                        <img src={require('@/assest/images/opBNB.png')} />
                     </a>
                     <a href="https://izumi.finance/" target="_blank">
                         <IZumi />
-                    </a>
-                    <a href="https://www.pimlico.io/" target="_blank">
-                        <Pimlico />
                     </a>
                     <span>to make this happen</span>
                 </div>
