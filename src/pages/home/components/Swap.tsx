@@ -112,7 +112,7 @@ const Index = (props: IProps) => {
                     <div>Balance: {usdcBalance}</div>
                 </div>
                 <div className="balance-item">
-                    <div>Your Activity tUSDT</div>
+                    <div>Your Odyssey tUSDT</div>
                     <div>Balance: {usdtBalance}</div>
                 </div>
             </div>
@@ -140,11 +140,11 @@ const Index = (props: IProps) => {
 
             {!swapComplete && (
                 <>
-                    <div className="swap">Swap to your address used in Activity</div>
+                    <div className="swap">Swap to your address used in Odyssey</div>
                     <Input
                         className="address"
                         value={address}
-                        placeholder="Please enter your address used in Activity"
+                        placeholder="Please enter your address used in Odyssey"
                         onChange={(e) => {
                             setVisibleError(false);
                             setAddress(e.target.value);
@@ -167,7 +167,7 @@ const Index = (props: IProps) => {
                 footer={null}
             >
                 <p className="hint-content">
-                    Are you sure the recipient address is the address for the opBNB Odyssey on Activity?
+                    Are you sure the recipient address is the address for the opBNB Odyssey on Odyssey?
                 </p>
                 <p className="hint-address">{address}</p>
 
