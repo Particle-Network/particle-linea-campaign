@@ -51,7 +51,7 @@ export const GlobalContextProvider = (props: any) => {
         await particle.auth.logout(true);
     }, [particle]);
 
-    const aaHelper = useMemo(() => new AAHelper(provider), [provider]);
+    const aaHelper = useMemo(() => new AAHelper(provider, opBNBTestnet), [provider]);
 
     useEffect(() => {
         setConnected(particle.auth.isLogin());

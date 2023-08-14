@@ -7,21 +7,25 @@ import {
 import tUSDCABI from '@/assest/abi/tUSDC.json';
 import type { UserOperationStruct } from '@account-abstraction/contracts';
 import { StaticJsonRpcProvider } from '@ethersproject/providers';
+import { type ChainInfo } from '@particle-network/chains';
 import { ethers } from 'ethers';
 import { getAddress, hexConcat, hexlify } from 'ethers/lib/utils';
 
 const ENTRY_POINT_ADDRESS = '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789';
 const SIMPLE_ACCOUNT_FACTORY_ADDRESS = '0x9406Cc6185a346906296840746125a0E44976454';
-const BUNDLER_ENDPOINT = 'https://bundler-rpc-debug.particle.network/rpc?chainId=5611';
 export const T_USDC = '0x86C1B1cE04feEA34c98E2d7A1dE760ec57892404';
 export const T_USDT = '0xaFab613C6A8108B730801D1cC659E7393e0C0984';
 
 class AAHelper {
     private bundlerProvider;
+    private paymasterProvider;
     private simpleAccountFactory;
     private entryPoint;
-    constructor(private provider: ethers.providers.Web3Provider) {
-        this.bundlerProvider = new StaticJsonRpcProvider(BUNDLER_ENDPOINT);
+    constructor(private provider: ethers.providers.Web3Provider, chainInfo: ChainInfo) {
+        this.bundlerProvider = new StaticJsonRpcProvider(`https://bundler.particle.network?chainId=${chainInfo.id}`);
+        this.paymasterProvider = new StaticJsonRpcProvider(
+            `https://paymaster.particle.network?chainId=${chainInfo.id}`
+        );
         this.simpleAccountFactory = SimpleAccountFactory__factory.connect(
             SIMPLE_ACCOUNT_FACTORY_ADDRESS,
             this.provider
@@ -92,7 +96,7 @@ class AAHelper {
             paymasterAndData: '0x',
             signature: '0x',
         };
-        const sponsorUserOperationResult = await this.bundlerProvider.send('pm_sponsorUserOperation', [
+        const sponsorUserOperationResult = await this.paymasterProvider.send('pm_sponsorUserOperation', [
             userOperation,
             ENTRY_POINT_ADDRESS,
         ]);
@@ -205,7 +209,7 @@ class AAHelper {
             signature: '0x',
         };
         console.log('Swap UserOp', userOperation);
-        const sponsorUserOperationResult = await this.bundlerProvider.send('pm_sponsorUserOperation', [
+        const sponsorUserOperationResult = await this.paymasterProvider.send('pm_sponsorUserOperation', [
             userOperation,
             ENTRY_POINT_ADDRESS,
         ]);
