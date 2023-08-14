@@ -31,7 +31,31 @@ const Index = (props: IProps) => {
                 }}
             >
                 <span className="btn-text">Tell me more about Particle Network</span>
-                <ArrowRightOutlined />
+                <ArrowRightOutlined
+                    style={{
+                        position: 'absolute',
+                        right: 8,
+                    }}
+                />
+            </Button>
+            <Button
+                className="btn-more"
+                type="primary"
+                style={{ marginTop: 10 }}
+                onClick={() => {
+                    window.open(
+                        'https://opbnb.bnbchain.org/en/campaigns/the-odyssey-from-testnet-to-mainnet',
+                        '_blank'
+                    );
+                }}
+            >
+                <span className="btn-text">Explore OPBNB Odyssey</span>
+                <ArrowRightOutlined
+                    style={{
+                        position: 'absolute',
+                        right: 8,
+                    }}
+                />
             </Button>
         </div>
     );
