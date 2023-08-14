@@ -36,7 +36,7 @@ const Index = () => {
     useEffect(() => {
         if (connected) {
             aaHelper
-                .getAddress()
+                .getSenderAddress()
                 .then((address) => {
                     setAddress(address);
                 })

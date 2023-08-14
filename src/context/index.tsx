@@ -2,6 +2,7 @@ import type { UserInfo } from '@particle-network/auth';
 import { AuthTypes, ParticleNetwork } from '@particle-network/auth';
 import { opBNBTestnet } from '@particle-network/chains';
 import { ParticleProvider } from '@particle-network/provider';
+import { ethers } from 'ethers';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import AAHelper from '../utils/aaHelper';
 
@@ -11,7 +12,7 @@ interface GlobalState {
     particle: ParticleNetwork;
     connect: () => Promise<UserInfo>;
     disconnect: () => Promise<void>;
-    provider: ParticleProvider;
+    provider: ethers.providers.Web3Provider;
     aaHelper: AAHelper;
     connected: boolean;
 }
@@ -37,7 +38,7 @@ export const GlobalContextProvider = (props: any) => {
     }, []);
 
     const provider = useMemo(() => {
-        return new ParticleProvider(particle.auth);
+        return new ethers.providers.Web3Provider(new ParticleProvider(particle.auth), 'any');
     }, [particle]);
 
     const connect = useCallback(async () => {

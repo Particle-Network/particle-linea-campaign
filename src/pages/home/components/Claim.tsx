@@ -17,7 +17,7 @@ const Index = (props: IProps) => {
     const [balance, setBalance] = useState('0.0');
     const [loading, setLoading] = useState(false);
     const [address, setAddress] = useState<string>();
-    const { connected } = useParticle();
+    const { connected, provider } = useParticle();
     const { aaHelper } = useAAHelper();
     const { currentStep } = props;
 
@@ -26,7 +26,13 @@ const Index = (props: IProps) => {
 
         try {
             if (Number(balance) < 1) {
-                const txHash = await aaHelper.mintTUSDC();
+                const userOp = await aaHelper.createMintTUSDCOp();
+                const userOpHash = await aaHelper.hashUserOp(userOp);
+                console.log('userOpHash', userOpHash);
+                const signature = await provider.getSigner().signMessage(userOpHash);
+                userOp.signature = signature;
+                console.log('userOp', userOp);
+                const txHash = await aaHelper.sendUserOp(userOp);
                 console.log(`UserOperation included: ${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`);
                 notification.success({
                     message: 'Claim tUSDC Success',
@@ -54,7 +60,7 @@ const Index = (props: IProps) => {
     const getBalance = async () => {
         console.log('getBalance started');
         try {
-            const senderAddress = await aaHelper.getAddress();
+            const senderAddress = await aaHelper.getSenderAddress();
             setAddress(senderAddress);
             console.log('senderAddress', senderAddress);
             const balance = await aaHelper.getTUSDCBalance(senderAddress);

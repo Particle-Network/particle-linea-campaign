@@ -22,7 +22,7 @@ const Index = (props: IProps) => {
     const [swapComplete, setSwapComplete] = useState(false);
     const [visibleError, setVisibleError] = useState(false);
     const [txHash, setTXHash] = useState<string>();
-    const { connected } = useParticle();
+    const { connected, provider } = useParticle();
     const { aaHelper } = useAAHelper();
 
     const { currentStep } = props;
@@ -39,7 +39,13 @@ const Index = (props: IProps) => {
         setHintModal(false);
         setLoading(true);
         try {
-            const txHash = await aaHelper.swapToken(receiverAddress);
+            const userOp = await aaHelper.swapToken(receiverAddress);
+            const userOpHash = await aaHelper.hashUserOp(userOp);
+            console.log('userOpHash', userOpHash);
+            const signature = await provider.getSigner().signMessage(userOpHash);
+            userOp.signature = signature;
+            console.log('userOp', userOp);
+            const txHash = await aaHelper.sendUserOp(userOp);
             setTXHash(txHash);
             console.log(`UserOperation included: ${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`);
             notification.success({
@@ -67,7 +73,7 @@ const Index = (props: IProps) => {
     useEffect(() => {
         if (connected && currentStep === 3) {
             aaHelper
-                .getAddress()
+                .getSenderAddress()
                 .then((address) => aaHelper.getTUSDCBalance(address))
                 .then((result) => setUSDCBalance(result))
                 .catch((e) => console.error(e));
@@ -88,7 +94,7 @@ const Index = (props: IProps) => {
 
     const refreshBalance = async (receiverAddress: string) => {
         try {
-            const senderAddress = await aaHelper.getAddress();
+            const senderAddress = await aaHelper.getSenderAddress();
             await Promise.all([
                 aaHelper.getTUSDCBalance(senderAddress).then((result) => setUSDCBalance(result)),
                 aaHelper.getTUSDTBalance(receiverAddress).then((result) => setUSDTBalance(result)),

@@ -3,7 +3,7 @@
     "version": "0.3.4",
     "private": true,
     "dependencies": {
-        "@particle-network/aa": "^1.0.0",
+        "@account-abstraction/contracts": "^0.6.0",
         "@particle-network/auth": "^1.0.0",
         "@particle-network/provider": "^1.0.0",
         "@testing-library/jest-dom": "^5.16.5",

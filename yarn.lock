@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@account-abstraction/contracts@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.npmmirror.com/@account-abstraction/contracts/-/contracts-0.6.0.tgz#7188a01839999226e6b2796328af338329543b76"
+  integrity sha512-8ooRJuR7XzohMDM4MV34I12Ci2bmxfE9+cixakRL7lA4BAwJKQ3ahvd8FbJa9kiwkUPCUNtj+/zxDQWYYalLMQ==
+
 "@adobe/css-tools@^4.0.1":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@adobe/css-tools/-/css-tools-4.2.0.tgz#e1a84fca468f4b337816fcb7f0964beb620ba855"
@@ -2037,14 +2042,6 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
-
-"@particle-network/aa@^1.0.0":
-  version "1.0.0"
-  resolved "https://r.cnpmjs.org/@particle-network/aa/-/aa-1.0.0.tgz#11d81103997e370e592fe06d907202248a4661c2"
-  integrity sha512-mLSh1O4UUnHOgUCnHdJqtcLnr3ZuaggewetRSnMZmEq8BijvJ0jcH2uaRy1w2y61dhoq0qksUAGZ2uwrGkR0qg==
-  dependencies:
-    axios "^1.3.6"
-    uuid "^8.3.2"
 
 "@particle-network/analytics@^1.0.0":
   version "1.0.0"
