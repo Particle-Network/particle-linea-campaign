@@ -226,14 +226,57 @@ class AAHelper {
         return userOperation;
     };
 
-    createMintOp = async (receiverAddress: string): Promise<UserOperationStruct> => {
+    createMintOp = async (): Promise<UserOperationStruct> => {
         const senderAddress = await this.getSenderAddress();
 
         const code = await this.provider.getCode(senderAddress);
         const initCode = code === '0x' ? await this.getInitCode() : '0x';
 
         const erc20Interface = new ethers.utils.Interface(['function safeMint(address _to)']);
-        const encodedData = erc20Interface.encodeFunctionData('safeMint', [receiverAddress]);
+        const encodedData = erc20Interface.encodeFunctionData('safeMint', [senderAddress]);
+
+        const to = ConstractAddress;
+        const value = 0;
+        const data = encodedData;
+
+        const simpleAccount = SimpleAccount__factory.connect(senderAddress, this.provider);
+        const callData = simpleAccount.interface.encodeFunctionData('execute', [to, value, data]);
+        const gasPrice = await this.provider.getGasPrice();
+        const nonce = await this.entryPoint.getNonce(senderAddress, 0);
+
+        const userOperation = {
+            sender: senderAddress,
+            nonce: hexlify(nonce),
+            initCode,
+            callData,
+            callGasLimit: hexlify(100_000), // hardcode it for now at a high value
+            verificationGasLimit: hexlify(400_000), // hardcode it for now at a high value
+            preVerificationGas: hexlify(50_000), // hardcode it for now at a high value
+            maxFeePerGas: hexlify(gasPrice),
+            maxPriorityFeePerGas: hexlify(gasPrice),
+            paymasterAndData: '0x',
+            signature: '0x',
+        };
+
+        const sponsorUserOperationResult = await this.paymasterProvider.send('pm_sponsorUserOperation', [
+            userOperation,
+            ENTRY_POINT_ADDRESS,
+        ]);
+
+        const paymasterAndData = sponsorUserOperationResult.paymasterAndData;
+
+        userOperation.paymasterAndData = paymasterAndData;
+        return userOperation;
+    };
+
+    createTransferOp = async (receiverAddress: string): Promise<UserOperationStruct> => {
+        const senderAddress = await this.getSenderAddress();
+
+        const code = await this.provider.getCode(senderAddress);
+        const initCode = code === '0x' ? await this.getInitCode() : '0x';
+
+        const erc20Interface = new ethers.utils.Interface(['function safeTransferFrom(address _to)']);
+        const encodedData = erc20Interface.encodeFunctionData('safeTransferFrom', [receiverAddress]);
 
         const to = ConstractAddress;
         const value = 0;

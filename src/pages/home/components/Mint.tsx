@@ -2,7 +2,8 @@ import MintImg from '@/assest/images/mint.gif';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Button, Input, message } from 'antd';
+import { useAsyncEffect } from 'ahooks';
+import { Button, message } from 'antd';
 import { useState } from 'react';
 
 interface IProps {
@@ -13,38 +14,16 @@ interface IProps {
 
 const Index = (props: IProps) => {
     const [loading, setLoading] = useState(false);
-    const [receiverAddress, setReceiverAddress] = useState<string>('');
+    const [address, setAddress] = useState<string>('');
 
-    const { provider } = useParticle();
+    const { connected, provider } = useParticle();
     const { aaHelper } = useAAHelper();
 
     const handleMint = async () => {
-        if (!receiverAddress) {
-            message.error('Please input address');
-            return;
-        }
-
-        // const isValidate = ethers.utils.isAddress(receiverAddress);
-        // if (isValidate) {
-        //     message.error('Invalid address');
-        //     return;
-        // }
-
-        try {
-            const balance = await aaHelper.getNftBalance(receiverAddress);
-            if (balance >= 1) {
-                message.error('You already mint this NFT to this address');
-                return;
-            }
-        } catch (error: any) {
-            message.error(error.message);
-            return;
-        }
-
         setLoading(true);
 
         try {
-            const userOp = await aaHelper.createMintOp(receiverAddress);
+            const userOp = await aaHelper.createMintOp();
 
             const userOpHash = await aaHelper.hashUserOp(userOp);
             console.log('userOpHash', userOpHash);
@@ -69,6 +48,13 @@ const Index = (props: IProps) => {
         setLoading(false);
     };
 
+    useAsyncEffect(async () => {
+        if (connected) {
+            const senderAddress = await aaHelper.getSenderAddress();
+            setAddress(senderAddress);
+        }
+    }, [aaHelper, connected]);
+
     return (
         <div className="mintContainer" style={props.style}>
             <div className="title">You wil get this NFT!</div>
@@ -76,13 +62,7 @@ const Index = (props: IProps) => {
                 <img src={MintImg} alt="" />
             </div>
             <div className="address-title">Your Smart Contract Account:</div>
-            <Input
-                className="address-value"
-                value={receiverAddress}
-                onChange={(e) => {
-                    setReceiverAddress(e.target.value);
-                }}
-            />
+            <div className="address-value">{address}</div>
             <Button className="btn-mint" type="primary" onClick={handleMint} loading={loading}>
                 <span className="btn-text">Mint</span>
                 <ArrowRightOutlined />
