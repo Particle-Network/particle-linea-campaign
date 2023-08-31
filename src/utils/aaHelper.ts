@@ -275,8 +275,15 @@ class AAHelper {
         const code = await this.provider.getCode(senderAddress);
         const initCode = code === '0x' ? await this.getInitCode() : '0x';
 
-        const erc20Interface = new ethers.utils.Interface(['function safeTransferFrom(address _to)']);
-        const encodedData = erc20Interface.encodeFunctionData('safeTransferFrom', [receiverAddress]);
+        const erc20Interface = new ethers.utils.Interface([
+            'function safeTransferFrom(address _from, address _to, uint256 _tokenId)',
+        ]);
+
+        const encodedData = erc20Interface.encodeFunctionData('safeTransferFrom', [
+            senderAddress,
+            receiverAddress,
+            '2',
+        ]);
 
         const to = ConstractAddress;
         const value = 0;
