@@ -1,7 +1,7 @@
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { opBNBTestnet } from '@particle-network/chains';
+import { ComboTestnet } from '@particle-network/chains';
 import { Button, Typography, message, notification } from 'antd';
 import React, { useEffect, useState } from 'react';
 
@@ -33,12 +33,12 @@ const Index = (props: IProps) => {
                 userOp.signature = signature;
                 console.log('userOp', userOp);
                 const txHash = await aaHelper.sendUserOp(userOp);
-                console.log(`UserOperation included: ${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`);
+                console.log(`UserOperation included: ${ComboTestnet.blockExplorerUrl}/tx/${txHash}`);
                 notification.success({
                     message: 'Claim tUSDC Success',
                     description: 'Click for more details',
                     onClick: () => {
-                        window.open(`${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
+                        window.open(`${ComboTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
                     },
                 });
             }
@@ -98,7 +98,7 @@ const Index = (props: IProps) => {
             <div
                 className="address-value"
                 onClick={() => {
-                    window.open(`${opBNBTestnet.blockExplorerUrl}/address/${address}`, '_blank');
+                    window.open(`${ComboTestnet.blockExplorerUrl}/address/${address}`, '_blank');
                 }}
             >
                 {address || ''}

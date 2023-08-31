@@ -1,6 +1,6 @@
 import type { UserInfo } from '@particle-network/auth';
 import { AuthTypes, ParticleNetwork } from '@particle-network/auth';
-import { opBNBTestnet } from '@particle-network/chains';
+import { ComboTestnet } from '@particle-network/chains';
 import { ParticleProvider } from '@particle-network/provider';
 import { ethers } from 'ethers';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
@@ -29,8 +29,8 @@ export const GlobalContextProvider = (props: any) => {
             projectId: process.env.REACT_APP_PROJECT_ID as string,
             clientKey: process.env.REACT_APP_CLIENT_KEY as string,
             appId: process.env.REACT_APP_APP_ID as string,
-            chainName: opBNBTestnet.name,
-            chainId: opBNBTestnet.id,
+            chainName: ComboTestnet.name,
+            chainId: ComboTestnet.id,
             wallet: {
                 displayWalletEntry: false,
             },
@@ -51,7 +51,7 @@ export const GlobalContextProvider = (props: any) => {
         await particle.auth.logout(true);
     }, [particle]);
 
-    const aaHelper = useMemo(() => new AAHelper(provider, opBNBTestnet), [provider]);
+    const aaHelper = useMemo(() => new AAHelper(provider, ComboTestnet), [provider]);
 
     useEffect(() => {
         setConnected(particle.auth.isLogin());

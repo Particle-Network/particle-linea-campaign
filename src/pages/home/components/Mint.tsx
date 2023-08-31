@@ -3,7 +3,7 @@ import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useAsyncEffect } from 'ahooks';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { useState } from 'react';
 
 interface IProps {
@@ -20,7 +20,8 @@ const Index = (props: IProps) => {
     const { aaHelper } = useAAHelper();
 
     const handleMint = async () => {
-        const userOp = await aaHelper.swapToken(address);
+        setLoading(true);
+        const userOp = await aaHelper.createMintOp();
         const userOpHash = await aaHelper.hashUserOp(userOp);
         console.log('userOpHash', userOpHash);
         const signature = await provider.getSigner().signMessage(userOpHash);
@@ -28,9 +29,18 @@ const Index = (props: IProps) => {
         console.log(222);
         console.log(signature);
 
-        const res = await aaHelper.safeMint(address, signature);
-        console.log(999);
-        console.log(res);
+        try {
+            const res = await aaHelper.safeMint(address, signature);
+            console.log(999);
+            console.log(res);
+            setLoading(false);
+        } catch (error: any) {
+            console.log('mint error', error);
+            if (error.message) {
+                message.error(error.message);
+            }
+            setLoading(false);
+        }
     };
 
     useAsyncEffect(async () => {
@@ -48,7 +58,7 @@ const Index = (props: IProps) => {
             </div>
             <div className="address-title">Your Smart Contract Account:</div>
             <div className="address-value">{address}</div>
-            <Button className="btn-mint" type="primary" onClick={handleMint}>
+            <Button className="btn-mint" type="primary" onClick={handleMint} loading={loading}>
                 <span className="btn-text">Mint</span>
                 <ArrowRightOutlined />
             </Button>

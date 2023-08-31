@@ -1,7 +1,7 @@
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { DownOutlined, HeartTwoTone } from '@ant-design/icons';
-import { opBNBTestnet } from '@particle-network/chains';
+import { ComboTestnet } from '@particle-network/chains';
 import { Button, Popover, Steps, message } from 'antd';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
@@ -76,7 +76,7 @@ const Index = () => {
     };
 
     const onScan = () => {
-        const scanUrl = `${opBNBTestnet.blockExplorerUrl}/address/${address}`;
+        const scanUrl = `${ComboTestnet.blockExplorerUrl}/address/${address}`;
         window.open(scanUrl, '_blank');
     };
 

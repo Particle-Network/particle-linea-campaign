@@ -1,7 +1,7 @@
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { opBNBTestnet } from '@particle-network/chains';
+import { ComboTestnet } from '@particle-network/chains';
 import { Button, Input, Modal, message, notification } from 'antd';
 import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react';
@@ -47,12 +47,12 @@ const Index = (props: IProps) => {
             console.log('userOp', userOp);
             const txHash = await aaHelper.sendUserOp(userOp);
             setTXHash(txHash);
-            console.log(`UserOperation included: ${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`);
+            console.log(`UserOperation included: ${ComboTestnet.blockExplorerUrl}/tx/${txHash}`);
             notification.success({
                 message: 'Swap Success',
                 description: 'Click for more details',
                 onClick: () => {
-                    window.open(`${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
+                    window.open(`${ComboTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
                 },
             });
             await refreshBalance(receiverAddress);
@@ -126,7 +126,7 @@ const Index = (props: IProps) => {
                         className="btn-check-tx"
                         type="text"
                         onClick={() => {
-                            window.open(`${opBNBTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
+                            window.open(`${ComboTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
                         }}
                     >
                         Check Transaction Here
