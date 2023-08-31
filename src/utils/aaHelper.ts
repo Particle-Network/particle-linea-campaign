@@ -42,11 +42,17 @@ class AAHelper {
 
     getInitCode = async (): Promise<string> => {
         const accounts = await this.provider.listAccounts();
-        const initCode = hexConcat([
+        return hexConcat([
             SIMPLE_ACCOUNT_FACTORY_ADDRESS,
             this.simpleAccountFactory.interface.encodeFunctionData('createAccount', [accounts[0], 0]),
         ]);
-        return initCode;
+    };
+
+    getOtherInitCode = async (address: string): Promise<string> => {
+        return hexConcat([
+            SIMPLE_ACCOUNT_FACTORY_ADDRESS,
+            this.simpleAccountFactory.interface.encodeFunctionData('createAccount', [address, 0]),
+        ]);
     };
 
     getSenderAddress = async (): Promise<string> => {
@@ -229,9 +235,12 @@ class AAHelper {
     };
 
     createMintOp = async (): Promise<UserOperationStruct> => {
-        const senderAddress = await this.getSenderAddress();
+        // const senderAddress = await this.getSenderAddress();
+
+        // 暂时写死测试
+        const senderAddress = '0x6DA0201DDfd0f2FB85aD086e554f1a23a95c3E37';
         const code = await this.provider.getCode(senderAddress);
-        const initCode = code === '0x' ? await this.getInitCode() : '0x';
+        const initCode = code === '0x' ? await this.getOtherInitCode(senderAddress) : '0x';
 
         const erc20Interface = new ethers.utils.Interface(['function safeMint(address _to)']);
         const encodedData = erc20Interface.encodeFunctionData('safeMint', [senderAddress]);
@@ -270,8 +279,8 @@ class AAHelper {
         return userOperation;
     };
 
-    safeMint = async (address: string, signature: string) => {
-        const contract = new ethers.Contract(ConstractAddress, nftABI, this.provider.getSigner());
+    safeMint = async (address: string) => {
+        const contract = new ethers.Contract(ConstractAddress, nftABI, this.provider);
         return contract.safeMint(address);
     };
 }

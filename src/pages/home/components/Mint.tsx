@@ -22,25 +22,30 @@ const Index = (props: IProps) => {
     const handleMint = async () => {
         setLoading(true);
         const userOp = await aaHelper.createMintOp();
+
         const userOpHash = await aaHelper.hashUserOp(userOp);
         console.log('userOpHash', userOpHash);
         const signature = await provider.getSigner().signMessage(userOpHash);
 
+        userOp.signature = signature;
+
+        const txHash = await aaHelper.sendUserOp(userOp);
+
         console.log(222);
         console.log(signature);
+        console.log(txHash);
 
         try {
-            const res = await aaHelper.safeMint(address, signature);
+            const res = await aaHelper.safeMint(address);
             console.log(999);
             console.log(res);
-            setLoading(false);
         } catch (error: any) {
             console.log('mint error', error);
             if (error.message) {
                 message.error(error.message);
             }
-            setLoading(false);
         }
+        setLoading(false);
     };
 
     useAsyncEffect(async () => {
