@@ -2,7 +2,6 @@ import MintImg from '@/assest/images/mint.gif';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { useAsyncEffect } from 'ahooks';
 import { Button, Input, message } from 'antd';
 import { useState } from 'react';
 
@@ -14,13 +13,34 @@ interface IProps {
 
 const Index = (props: IProps) => {
     const [loading, setLoading] = useState(false);
-    const [address, setAddress] = useState<string>('');
     const [receiverAddress, setReceiverAddress] = useState<string>('');
 
-    const { connected, provider } = useParticle();
+    const { provider } = useParticle();
     const { aaHelper } = useAAHelper();
 
     const handleMint = async () => {
+        if (!receiverAddress) {
+            message.error('Please input address');
+            return;
+        }
+
+        // const isValidate = ethers.utils.isAddress(receiverAddress);
+        // if (isValidate) {
+        //     message.error('Invalid address');
+        //     return;
+        // }
+
+        try {
+            const balance = await aaHelper.getNftBalance(receiverAddress);
+            if (balance >= 1) {
+                message.error('You already mint this NFT to this address');
+                return;
+            }
+        } catch (error: any) {
+            message.error(error.message);
+            return;
+        }
+
         setLoading(true);
 
         try {
@@ -36,6 +56,9 @@ const Index = (props: IProps) => {
 
             console.log('txHash');
             console.log(txHash);
+
+            message.success('Mint success');
+            props.onSuccess();
         } catch (error: any) {
             console.log('mint error', error);
             if (error.message) {
@@ -45,13 +68,6 @@ const Index = (props: IProps) => {
 
         setLoading(false);
     };
-
-    useAsyncEffect(async () => {
-        if (connected) {
-            const senderAddress = await aaHelper.getSenderAddress();
-            setAddress(senderAddress);
-        }
-    }, [aaHelper, connected]);
 
     return (
         <div className="mintContainer" style={props.style}>

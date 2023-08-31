@@ -13,7 +13,7 @@ import './index.scss';
 
 const Index = () => {
     const [loading, setLoading] = useState(true);
-    const [currentStep, setCurrentStep] = useState(2);
+    const [currentStep, setCurrentStep] = useState(0);
     const [address, setAddress] = useState<string>();
 
     const { particle, connected, connect, disconnect } = useParticle();

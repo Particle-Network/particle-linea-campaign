@@ -14,9 +14,9 @@ import { getAddress, hexConcat, hexlify } from 'ethers/lib/utils';
 const ENTRY_POINT_ADDRESS = '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789';
 const SIMPLE_ACCOUNT_FACTORY_ADDRESS = '0x9406Cc6185a346906296840746125a0E44976454';
 
-export const T_USDC = '0x86C1B1cE04feEA34c98E2d7A1dE760ec57892404';
+const T_USDC = '0x86C1B1cE04feEA34c98E2d7A1dE760ec57892404';
 
-export const T_USDT = '0xaFab613C6A8108B730801D1cC659E7393e0C0984';
+const T_USDT = '0xaFab613C6A8108B730801D1cC659E7393e0C0984';
 
 const ConstractAddress = '0x74883445AF29A502a1866d1E847d9B2c5fF74ac4';
 
@@ -269,8 +269,11 @@ class AAHelper {
         return userOperation;
     };
 
-    getNftBalance = async (address: string) => {
+    getNftBalance = async (senderAddress: string) => {
         const contract = new ethers.Contract(ConstractAddress, nftABI, this.provider);
+        const balance = await contract.balanceOf(senderAddress);
+        console.log('balance', balance, balance.toNumber());
+        return balance.toNumber();
     };
 }
 
