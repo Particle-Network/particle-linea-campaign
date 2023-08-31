@@ -1,12 +1,11 @@
+import nftABI from '@/assest/abi/nft.json';
+import tUSDCABI from '@/assest/abi/tUSDC.json';
+import type { UserOperationStruct } from '@account-abstraction/contracts';
 import {
     EntryPoint__factory,
     SimpleAccountFactory__factory,
     SimpleAccount__factory,
 } from '@account-abstraction/contracts';
-
-import nftABI from '@/assest/abi/nft.json';
-import tUSDCABI from '@/assest/abi/tUSDC.json';
-import type { UserOperationStruct } from '@account-abstraction/contracts';
 import { StaticJsonRpcProvider } from '@ethersproject/providers';
 import { type ChainInfo } from '@particle-network/chains';
 import { ethers } from 'ethers';
@@ -45,13 +44,6 @@ class AAHelper {
         return hexConcat([
             SIMPLE_ACCOUNT_FACTORY_ADDRESS,
             this.simpleAccountFactory.interface.encodeFunctionData('createAccount', [accounts[0], 0]),
-        ]);
-    };
-
-    getOtherInitCode = async (address: string): Promise<string> => {
-        return hexConcat([
-            SIMPLE_ACCOUNT_FACTORY_ADDRESS,
-            this.simpleAccountFactory.interface.encodeFunctionData('createAccount', [address, 0]),
         ]);
     };
 
@@ -234,16 +226,14 @@ class AAHelper {
         return userOperation;
     };
 
-    createMintOp = async (): Promise<UserOperationStruct> => {
-        // const senderAddress = await this.getSenderAddress();
+    createMintOp = async (receiverAddress: string): Promise<UserOperationStruct> => {
+        const senderAddress = await this.getSenderAddress();
 
-        // 暂时写死测试
-        const senderAddress = '0x6DA0201DDfd0f2FB85aD086e554f1a23a95c3E37';
         const code = await this.provider.getCode(senderAddress);
-        const initCode = code === '0x' ? await this.getOtherInitCode(senderAddress) : '0x';
+        const initCode = code === '0x' ? await this.getInitCode() : '0x';
 
         const erc20Interface = new ethers.utils.Interface(['function safeMint(address _to)']);
-        const encodedData = erc20Interface.encodeFunctionData('safeMint', [senderAddress]);
+        const encodedData = erc20Interface.encodeFunctionData('safeMint', [receiverAddress]);
 
         const to = ConstractAddress;
         const value = 0;
@@ -279,9 +269,8 @@ class AAHelper {
         return userOperation;
     };
 
-    safeMint = async (address: string) => {
+    getNftBalance = async (address: string) => {
         const contract = new ethers.Contract(ConstractAddress, nftABI, this.provider);
-        return contract.safeMint(address);
     };
 }
 

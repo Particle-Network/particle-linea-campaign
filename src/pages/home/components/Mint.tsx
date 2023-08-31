@@ -3,7 +3,7 @@ import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useAsyncEffect } from 'ahooks';
-import { Button, message } from 'antd';
+import { Button, Input, message } from 'antd';
 import { useState } from 'react';
 
 interface IProps {
@@ -15,36 +15,34 @@ interface IProps {
 const Index = (props: IProps) => {
     const [loading, setLoading] = useState(false);
     const [address, setAddress] = useState<string>('');
+    const [receiverAddress, setReceiverAddress] = useState<string>('');
 
     const { connected, provider } = useParticle();
     const { aaHelper } = useAAHelper();
 
     const handleMint = async () => {
         setLoading(true);
-        const userOp = await aaHelper.createMintOp();
-
-        const userOpHash = await aaHelper.hashUserOp(userOp);
-        console.log('userOpHash', userOpHash);
-        const signature = await provider.getSigner().signMessage(userOpHash);
-
-        userOp.signature = signature;
-
-        const txHash = await aaHelper.sendUserOp(userOp);
-
-        console.log(222);
-        console.log(signature);
-        console.log(txHash);
 
         try {
-            const res = await aaHelper.safeMint(address);
-            console.log(999);
-            console.log(res);
+            const userOp = await aaHelper.createMintOp(receiverAddress);
+
+            const userOpHash = await aaHelper.hashUserOp(userOp);
+            console.log('userOpHash', userOpHash);
+            const signature = await provider.getSigner().signMessage(userOpHash);
+
+            userOp.signature = signature;
+
+            const txHash = await aaHelper.sendUserOp(userOp);
+
+            console.log('txHash');
+            console.log(txHash);
         } catch (error: any) {
             console.log('mint error', error);
             if (error.message) {
                 message.error(error.message);
             }
         }
+
         setLoading(false);
     };
 
@@ -62,7 +60,13 @@ const Index = (props: IProps) => {
                 <img src={MintImg} alt="" />
             </div>
             <div className="address-title">Your Smart Contract Account:</div>
-            <div className="address-value">{address}</div>
+            <Input
+                className="address-value"
+                value={receiverAddress}
+                onChange={(e) => {
+                    setReceiverAddress(e.target.value);
+                }}
+            />
             <Button className="btn-mint" type="primary" onClick={handleMint} loading={loading}>
                 <span className="btn-text">Mint</span>
                 <ArrowRightOutlined />
