@@ -22,7 +22,7 @@ const Index = (props: IProps) => {
     return (
         <div className="completedContainer" style={props.style}>
             <div className="congratulations">Congratulations!</div>
-            <div className="finished">You have finished the quests for Particle x opBNB Odyssey Campaign</div>
+            <div className="finished">You have finished the quests for Particle x opBNB Campaign</div>
             <Button
                 className="btn-more"
                 type="primary"
@@ -49,7 +49,7 @@ const Index = (props: IProps) => {
                     );
                 }}
             >
-                <span className="btn-text">Explore OPBNB Odyssey</span>
+                <span className="btn-text">Explore OPBNB</span>
                 <ArrowRightOutlined
                     style={{
                         position: 'absolute',

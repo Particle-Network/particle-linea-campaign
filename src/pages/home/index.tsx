@@ -141,10 +141,11 @@ const Index = () => {
                 )}
             </div>
             <div className="header">
-                <div className="title">Particle @ opBNB Odyssey</div>
+                <div className="title">Particle @ opBNB</div>
                 <div className="subtitle">
-                    The opBNB network is the Layer 2 scaling solution for the BNB Smart Chain powered by bedrock version
-                    of Optimism OP Stack.
+                    opBNB is a high-performance layer-2 solution within the BNB ecosystem, built using the OP Stack.
+                    Leveraging its block size of 100M, opBNB's gas fees remain stable and low cost, making it a great
+                    solution for widespread adoption across multiple digital environments.
                 </div>
             </div>
             <div className="main">
