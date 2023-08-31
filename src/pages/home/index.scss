@@ -351,7 +351,6 @@ body {
 .claimContainer .btn-claim,
 .swapContainer .btn-swap,
 .mintContainer .btn-mint,
-.transferContainer .btn-transfer,
 .connectContainer .btn-connect,
 .completedContainer .btn-more {
     background: #ffffff;
@@ -529,13 +528,14 @@ body {
     .btn-mint {
         margin-top: 40px;
     }
-}
-
-.transferContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 65px;
+    &.transferContainer {
+        .img {
+            margin-top: 0;
+        }
+        .address-title {
+            margin-top: 24px;
+        }
+    }
 }
 
 .connectContainer {
@@ -772,7 +772,6 @@ body {
     .claimContainer .btn-claim,
     .swapContainer .btn-swap,
     .mintContainer .btn-mint,
-    .transferContainer .btn-transfer,
     .connectContainer .btn-connect,
     .completedContainer .btn-more {
         width: 180px;

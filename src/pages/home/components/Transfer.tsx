@@ -18,17 +18,11 @@ const Index = (props: IProps) => {
     const { provider } = useParticle();
     const { aaHelper } = useAAHelper();
 
-    const handleMint = async () => {
+    const handleTransfer = async () => {
         if (!receiverAddress) {
             message.error('Please input address');
             return;
         }
-
-        // const isValidate = ethers.utils.isAddress(receiverAddress);
-        // if (isValidate) {
-        //     message.error('Invalid address');
-        //     return;
-        // }
 
         try {
             const balance = await aaHelper.getNftBalance(receiverAddress);
@@ -70,12 +64,11 @@ const Index = (props: IProps) => {
     };
 
     return (
-        <div className="mintContainer" style={props.style}>
-            <div className="title">You wil get this NFT!</div>
+        <div className="mintContainer transferContainer" style={props.style}>
             <div className="img">
                 <img src={MintImg} alt="" />
             </div>
-            <div className="address-title">Your Smart Contract Account:</div>
+            <div className="address-title">Transfer to Smart Contract Account:</div>
             <Input
                 className="address"
                 value={receiverAddress}
@@ -83,8 +76,8 @@ const Index = (props: IProps) => {
                     setReceiverAddress(e.target.value);
                 }}
             />
-            <Button className="btn-mint" type="primary" onClick={handleMint} loading={loading}>
-                <span className="btn-text">Mint</span>
+            <Button className="btn-mint" type="primary" onClick={handleTransfer} loading={loading}>
+                <span className="btn-text">Transfer</span>
                 <ArrowRightOutlined />
             </Button>
         </div>
