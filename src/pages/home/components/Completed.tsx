@@ -22,7 +22,7 @@ const Index = (props: IProps) => {
     return (
         <div className="completedContainer" style={props.style}>
             <div className="congratulations">Congratulations!</div>
-            <div className="finished">You have finished the quests for Particle x opBNB Campaign</div>
+            <div className="finished">You have finished the quests for Particle x Combo Campaign</div>
             <Button
                 className="btn-more"
                 type="primary"
@@ -43,13 +43,10 @@ const Index = (props: IProps) => {
                 type="primary"
                 style={{ marginTop: 10 }}
                 onClick={() => {
-                    window.open(
-                        'https://opbnb.bnbchain.org/en/campaigns/the-odyssey-from-testnet-to-mainnet',
-                        '_blank'
-                    );
+                    window.open('https://combonetwork.io/', '_blank');
                 }}
             >
-                <span className="btn-text">Explore OPBNB</span>
+                <span className="btn-text">Explore Combo</span>
                 <ArrowRightOutlined
                     style={{
                         position: 'absolute',

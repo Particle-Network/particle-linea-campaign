@@ -167,7 +167,7 @@ const Index = (props: IProps) => {
                 footer={null}
             >
                 <p className="hint-content">
-                    Are you sure the recipient address is the address for the opBNB Odyssey on Odyssey?
+                    Are you sure the recipient address is the address for the Combo on Odyssey?
                 </p>
                 <p className="hint-address">{address}</p>
 

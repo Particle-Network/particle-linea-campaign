@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import type { OpaqueConfig, PlainStyle } from 'react-motion';
 import { Motion, spring } from 'react-motion';
 import { ComponentHeight, ComponentItems, SpringSettings, StepsItems, isDevelopment } from './config';
-import { IZumi, Logo } from './icons';
+import { Logo } from './icons';
 import './index.scss';
 
 const Index = () => {
@@ -141,11 +141,12 @@ const Index = () => {
                 )}
             </div>
             <div className="header">
-                <div className="title">Particle @ opBNB</div>
+                <div className="title">Particle @ Combo</div>
                 <div className="subtitle">
-                    opBNB is a high-performance layer-2 solution within the BNB ecosystem, built using the OP Stack.
-                    Leveraging its block size of 100M, opBNB's gas fees remain stable and low cost, making it a great
-                    solution for widespread adoption across multiple digital environments.
+                    COMBO is a leading provider of scaling solutions for Web3 game development. By leveraging the
+                    world's top game engine, COMBO is building an open-source, decentralized, game-oriented Layer2 that
+                    is accessible to everyone. It aims to maximize the potential of Web3 games by connecting game
+                    developers with the entire ecosystem in an efficient, affordable, and secure way.
                 </div>
             </div>
             <div className="main">
@@ -196,11 +197,8 @@ const Index = () => {
                 </div>
                 <div className="thanks">
                     <span>And many thanks to our friends at</span>
-                    <a href="https://opbnb.bnbchain.org/" target="_blank">
-                        <img src={require('@/assest/images/opBNB.png')} />
-                    </a>
-                    <a href="https://izumi.finance/" target="_blank">
-                        <IZumi />
+                    <a href="https://combonetwork.io/" target="_blank">
+                        <img src={require('@/assest/images/Combo.png')} />
                     </a>
                     <span>to make this happen</span>
                 </div>
