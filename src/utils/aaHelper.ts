@@ -22,9 +22,11 @@ class AAHelper {
     private simpleAccountFactory;
     private entryPoint;
     constructor(private provider: ethers.providers.Web3Provider, chainInfo: ChainInfo) {
-        this.bundlerProvider = new StaticJsonRpcProvider(`https://bundler.particle.network?chainId=${chainInfo.id}`);
+        this.bundlerProvider = new StaticJsonRpcProvider(
+            `https://bundler-debug.particle.network?chainId=${chainInfo.id}`
+        );
         this.paymasterProvider = new StaticJsonRpcProvider(
-            `https://paymaster.particle.network?chainId=${chainInfo.id}`
+            `https://paymaster-debug.particle.network?chainId=${chainInfo.id}`
         );
         this.simpleAccountFactory = SimpleAccountFactory__factory.connect(
             SIMPLE_ACCOUNT_FACTORY_ADDRESS,
