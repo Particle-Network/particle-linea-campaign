@@ -1,6 +1,7 @@
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { DownOutlined, HeartTwoTone } from '@ant-design/icons';
+import { opBNBTestnet } from '@particle-network/chains';
 import { Button, Popover, Steps, message } from 'antd';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
@@ -8,12 +9,11 @@ import type { OpaqueConfig, PlainStyle } from 'react-motion';
 import { Motion, spring } from 'react-motion';
 import { ComponentHeight, ComponentItems, SpringSettings, StepsItems, isDevelopment } from './config';
 import { IZumi, Logo } from './icons';
-import { opBNBTestnet } from '@particle-network/chains';
 import './index.scss';
 
 const Index = () => {
     const [loading, setLoading] = useState(true);
-    const [currentStep, setCurrentStep] = useState(0);
+    const [currentStep, setCurrentStep] = useState(2);
     const [address, setAddress] = useState<string>();
 
     const { particle, connected, connect, disconnect } = useParticle();
@@ -21,6 +21,7 @@ const Index = () => {
 
     useEffect(() => {
         if (particle.auth.isLogin()) {
+            particle.setERC4337(true);
             setCurrentStep(localStorage.getItem(`completed_${particle.auth.userInfo()?.uuid}`) ? 4 : 2);
         }
         setLoading(false);
@@ -123,6 +124,7 @@ const Index = () => {
                     </span>
                     <span className="header-text">About Particle Network</span>
                 </a>
+
                 {currentStep !== 0 && !connected && (
                     <Button className="btn-connect-action" type="primary" onClick={onConnect}>
                         <span className="btn-linear-text">Connect</span>

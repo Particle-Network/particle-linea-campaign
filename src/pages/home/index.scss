@@ -350,6 +350,8 @@ body {
 .loginContainer .btn-login,
 .claimContainer .btn-claim,
 .swapContainer .btn-swap,
+.mintContainer .btn-mint,
+.transferContainer .btn-transfer,
 .connectContainer .btn-connect,
 .completedContainer .btn-more {
     background: #ffffff;
@@ -466,6 +468,58 @@ body {
         color: #f16363;
         margin-top: 40px;
     }
+}
+
+.mintContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 65px;
+    .title {
+        color: #fff;
+        font-family: 'Inter';
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+    }
+    .img {
+        width: 140px;
+        height: 140px;
+        margin-top: 24px;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .address-title {
+        color: #fff;
+        font-family: 'Inter';
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+    }
+    .address-value {
+        color: #fff;
+        text-align: center;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 18px;
+        margin-top: 8px;
+    }
+    .btn-mint {
+        margin-top: 40px;
+    }
+}
+
+.transferContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 65px;
 }
 
 .connectContainer {
@@ -701,6 +755,8 @@ body {
     .loginContainer .btn-login,
     .claimContainer .btn-claim,
     .swapContainer .btn-swap,
+    .mintContainer .btn-mint,
+    .transferContainer .btn-transfer,
     .connectContainer .btn-connect,
     .completedContainer .btn-more {
         width: 180px;

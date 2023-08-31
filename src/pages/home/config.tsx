@@ -1,8 +1,8 @@
-import Claim from './components/Claim';
 import Completed from './components/Completed';
 import Follow from './components/Follow';
 import Login from './components/Login';
-import Swap from './components/Swap';
+import Mint from './components/Mint';
+import Transfer from './components/Transfer';
 
 export const ComponentHeight = 490;
 
@@ -18,10 +18,10 @@ export const StepsItems = [
         title: 'Connect with Particle',
     },
     {
-        title: 'Claim tUSDC',
+        title: 'Gasless Mint NFT',
     },
     {
-        title: 'Swap tUSDC to tUSDT',
+        title: 'Gasless Transfer NFT',
     },
     {
         title: 'Completed',
@@ -40,14 +40,14 @@ export const ComponentItems = [
         Component: Login,
     },
     {
-        label: 'Claim',
-        key: 'claim',
-        Component: Claim,
+        label: 'Mint',
+        key: 'mint',
+        Component: Mint,
     },
     {
-        label: 'Swap',
-        key: 'swap',
-        Component: Swap,
+        label: 'Transfer',
+        key: 'transfer',
+        Component: Transfer,
     },
     {
         label: 'Completed',

@@ -14,6 +14,7 @@
         "@types/node": "^16.18.34",
         "@types/react": "^18.2.9",
         "@types/react-dom": "^18.2.4",
+        "ahooks": "^3.7.8",
         "antd": "4.24.10",
         "buffer": "^6.0.3",
         "crypto-browserify": "^3.12.0",
