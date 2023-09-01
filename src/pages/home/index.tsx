@@ -21,7 +21,6 @@ const Index = () => {
 
     useEffect(() => {
         if (particle.auth.isLogin()) {
-            particle.setERC4337(true);
             setCurrentStep(localStorage.getItem(`completed_${particle.auth.userInfo()?.uuid}`) ? 4 : 2);
         }
         setLoading(false);
@@ -51,7 +50,6 @@ const Index = () => {
         try {
             await connect();
             setCurrentStep(localStorage.getItem(`completed_${particle.auth.userInfo()?.uuid}`) ? 4 : 2);
-            particle.setERC4337(true);
         } catch (error: any) {
             console.log('connect error', error);
             if (error.message) {

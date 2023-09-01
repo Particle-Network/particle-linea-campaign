@@ -4,9 +4,9 @@
     "private": true,
     "dependencies": {
         "@account-abstraction/contracts": "^0.6.0",
-        "@particle-network/auth": "^1.0.0",
-        "@particle-network/chains": "^1.0.4",
-        "@particle-network/provider": "^1.0.0",
+        "@particle-network/auth": "1.0.2",
+        "@particle-network/chains": "1.0.4",
+        "@particle-network/provider": "1.0.2",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
