@@ -43,10 +43,10 @@ const Index = (props: IProps) => {
                 type="primary"
                 style={{ marginTop: 10 }}
                 onClick={() => {
-                    window.open('https://combonetwork.io/', '_blank');
+                    window.open('https://galxe.com/', '_blank');
                 }}
             >
-                <span className="btn-text">Explore Combo</span>
+                <span className="btn-text">Go to Galxe and Claim Reward</span>
                 <ArrowRightOutlined
                     style={{
                         position: 'absolute',
