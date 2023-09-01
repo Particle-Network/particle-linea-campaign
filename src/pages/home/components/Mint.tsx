@@ -83,8 +83,15 @@ const Index = (props: IProps) => {
             <div className="img">
                 <img src={CampaignConfig.nftIcon} alt="" />
             </div>
-            <div className="address-title">Your Smart Contract Account:</div>
-            <div className="address-value">{address}</div>
+            <div className="address-title">Your Smart Contract Account</div>
+            <div
+                className="address-value"
+                onClick={() => {
+                    window.open(CampaignConfig.getScanUrl(address), '_blank');
+                }}
+            >
+                {address}
+            </div>
             <Button className="btn-mint" type="primary" onClick={handleMint} loading={loading}>
                 <span className="btn-text">Gasless Mint</span>
                 <ArrowRightOutlined />

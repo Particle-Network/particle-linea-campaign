@@ -1,4 +1,5 @@
 import tUSDCABI from '@/assest/abi/tUSDC.json';
+import { BundlerApiPrefix, PaymasterApiPrefix } from '@/configs';
 import type { UserOperationStruct } from '@account-abstraction/contracts';
 import {
     EntryPoint__factory,
@@ -26,12 +27,8 @@ class AAHelper {
     private entryPoint;
     private tokenId;
     constructor(private provider: ethers.providers.Web3Provider, chainInfo: ChainInfo) {
-        this.bundlerProvider = new StaticJsonRpcProvider(
-            `https://bundler-debug.particle.network?chainId=${chainInfo.id}`
-        );
-        this.paymasterProvider = new StaticJsonRpcProvider(
-            `https://paymaster-debug.particle.network?chainId=${chainInfo.id}`
-        );
+        this.bundlerProvider = new StaticJsonRpcProvider(`${BundlerApiPrefix}?chainId=${chainInfo.id}`);
+        this.paymasterProvider = new StaticJsonRpcProvider(`${PaymasterApiPrefix}?chainId=${chainInfo.id}`);
         this.simpleAccountFactory = SimpleAccountFactory__factory.connect(
             SIMPLE_ACCOUNT_FACTORY_ADDRESS,
             this.provider

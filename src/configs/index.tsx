@@ -16,18 +16,52 @@ const isProduction = !isDevelopment && !isDebug;
 window.__PARTICLE_ENVIRONMENT__ = isProduction ? 'production' : 'development';
 
 const DebugEnv = {
-    PROJECT_ID: 'bf90c148-e0f8-46ac-9ccd-c947bb8c2e4a',
-    CLIENT_KEY: 'cSuaEDxwyRbonAjPGrTZDJTPDwYQUJ4yqc4HryET',
-    APP_ID: 'aaf93c07-a10a-420b-99e2-686c125f6e8f',
+    [opBNB.id]: {
+        PROJECT_ID: 'ce4e094f-49e7-478d-8ae8-8c749e43cd6a',
+        CLIENT_KEY: 'cFSixa1sZgubkIXU0Dx7EKViYIeadYm5OGQufru2',
+        APP_ID: 'd112f2ef-7bf1-49a7-befa-f8ef6288872c',
+    },
+
+    [ComboTestnet.id]: {
+        PROJECT_ID: '7ae78c8a-0358-42ff-9f3c-d79d0e5b325a',
+        CLIENT_KEY: 'cAwXhxfGQ5ABPkgU3TZ9tayimrGfSpw8SiDP2pVa',
+        APP_ID: 'f638d509-0419-4e20-9c6f-833df32cd50c',
+    },
+
+    [ScrollSepolia.id]: {
+        PROJECT_ID: '11fc3744-3778-4bbf-ae66-b67587d4df5f',
+        CLIENT_KEY: 'cpKhY3E7S6LKTf0u3Ine8iAQc0XdXGgTqAOsYQXD',
+        APP_ID: '1cdffd9a-03a7-4ed9-ae14-dc9715fb029b',
+    },
 };
 
 const ProductionEnv = {
-    PROJECT_ID: '4ae419ad-9ac8-494a-bd5f-276168f44d8b',
-    CLIENT_KEY: 'cPWgNfkacly7D7Y7UrF1u18TTNcxQQ2EIyfM0iAO',
-    APP_ID: 'faa97695-6142-433d-aa3f-7fbe554dd2fc',
+    [opBNB.id]: {
+        PROJECT_ID: '6f1d6acc-e87e-4b51-b761-2b8278922717',
+        CLIENT_KEY: 'cO7xwHGSiIo8qkGxy0RxUS9egUMuyPeEvHIyASdl',
+        APP_ID: 'd2034ee7-f532-4b9b-b208-ffdbbce6561a',
+    },
+    [ComboTestnet.id]: {
+        PROJECT_ID: 'e1551846-9cd4-4c52-9016-8814effe2f39',
+        CLIENT_KEY: 'c6x3op9eujQ4sWZgiy79Q7I7WR3FuzTnHZsNM5QL',
+        APP_ID: 'ef78228f-6918-41ea-b148-5d0b2a573c16',
+    },
+    [ScrollSepolia.id]: {
+        PROJECT_ID: '769f1bd0-f918-433f-8dc9-ce5ad360357e',
+        CLIENT_KEY: 'cKEGkIzUYutcckiU6D7H7WCVpZPsybqdFsyj4dWp',
+        APP_ID: '5c23e535-b3f6-4797-a6f1-3975e15298d4',
+    },
 };
 
-export const EnvData = isProduction ? ProductionEnv : DebugEnv;
+export const BundlerApiPrefix = ['https://', isProduction ? 'bundler' : 'bundler-debug', '.particle.network'].join('');
+
+export const PaymasterApiPrefix = [
+    'https://',
+    isProduction ? 'paymaster' : 'paymaster-debug',
+    '.particle.network',
+].join('');
+
+export const EnvData = (isProduction ? ProductionEnv : DebugEnv)[getCurrentChainId()];
 
 const ComboConfig = {
     Chain: ComboTestnet,

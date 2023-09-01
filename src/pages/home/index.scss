@@ -501,8 +501,10 @@ body {
         font-style: normal;
         font-weight: 500;
         line-height: 30px;
+        margin-top: 24px;
     }
     .address-value {
+        cursor: pointer;
         color: #fff;
         text-align: center;
         font-family: Inter;

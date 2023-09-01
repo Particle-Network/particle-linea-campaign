@@ -54,12 +54,12 @@ const Index = (props: IProps) => {
 
     return (
         <div className="mintContainer transferContainer" style={props.style}>
-            <div className="title">Send this NFT to your Galxe</div>
+            <div className="title">Send this NFT to your Galxe Wallet</div>
             <div className="img">
                 <img src={CampaignConfig.nftIcon} alt="" />
             </div>
             <Input
-                placeholder="Please enter your address used in Galxe"
+                placeholder="Please enter your address used in Galxe Wallet"
                 className="address"
                 value={receiverAddress}
                 onChange={(e) => {
