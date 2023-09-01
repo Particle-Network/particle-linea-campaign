@@ -5,7 +5,6 @@ import { ConstractAddress } from '@/utils/aaHelper';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useAsyncEffect } from 'ahooks';
 import { Button, message, notification } from 'antd';
-import { hexStripZeros } from 'ethers/lib/utils';
 import { useState } from 'react';
 
 interface IProps {
@@ -38,11 +37,7 @@ const Index = (props: IProps) => {
             const { txHash, receipt } = await aaHelper.sendUserOp(userOp);
 
             const txLog = receipt?.logs?.find(
-                (log: any) =>
-                    log.address.toLowerCase() === ConstractAddress.toLowerCase() &&
-                    log.topics.length === 4 &&
-                    Number(log.topics[1]) === 0 &&
-                    hexStripZeros(log.topics[2]).toLowerCase() === address.toLowerCase()
+                (log: any) => log.address.toLowerCase() === ConstractAddress.toLowerCase()
             );
 
             console.log('receipt', receipt);
