@@ -59,6 +59,7 @@ const Index = (props: IProps) => {
                 <img src={CampaignConfig.nftIcon} alt="" />
             </div>
             <Input
+                placeholder="Please enter your address used in Galxe"
                 className="address"
                 value={receiverAddress}
                 onChange={(e) => {
