@@ -1,9 +1,12 @@
 import MintImg from '@/assest/images/NftCombo.gif';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
+import { ConstractAddress } from '@/utils/aaHelper';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { ComboTestnet } from '@particle-network/chains';
 import { useAsyncEffect } from 'ahooks';
-import { Button, message } from 'antd';
+import { Button, message, notification } from 'antd';
+import { hexStripZeros } from 'ethers/lib/utils';
 import { useState } from 'react';
 
 interface IProps {
@@ -31,12 +34,26 @@ const Index = (props: IProps) => {
 
             userOp.signature = signature;
 
-            const txHash = await aaHelper.sendUserOp(userOp);
+            const { txHash, receipt } = await aaHelper.sendUserOp(userOp);
+            const txLog = receipt?.logs?.find(
+                (log: any) =>
+                    log.address === ConstractAddress &&
+                    log.topics.length === 4 &&
+                    Number(log.topics[1]) === 0 &&
+                    hexStripZeros(log.topics[2]).toLowerCase() === address.toLowerCase()
+            );
+            const tokenId = Number(txLog?.topics[3]);
 
-            console.log('txHash');
-            console.log(txHash);
+            console.log(`txHash: ${txHash},tokenId: ${tokenId}`);
 
             message.success('Mint success');
+            notification.success({
+                message: 'Mint NFT Success',
+                description: 'Click for more details',
+                onClick: () => {
+                    window.open(`${ComboTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
+                },
+            });
             props.onSuccess();
         } catch (error: any) {
             console.log('mint error', error);
