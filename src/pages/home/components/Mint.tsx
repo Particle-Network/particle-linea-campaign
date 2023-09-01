@@ -1,4 +1,4 @@
-import MintImg from '@/assest/images/mint.gif';
+import MintImg from '@/assest/images/NftCombo.gif';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';

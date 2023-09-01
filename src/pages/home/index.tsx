@@ -51,6 +51,7 @@ const Index = () => {
         try {
             await connect();
             setCurrentStep(localStorage.getItem(`completed_${particle.auth.userInfo()?.uuid}`) ? 4 : 2);
+            particle.setERC4337(true);
         } catch (error: any) {
             console.log('connect error', error);
             if (error.message) {
