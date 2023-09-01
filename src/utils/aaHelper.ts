@@ -284,6 +284,8 @@ class AAHelper {
             'function safeTransferFrom(address _from, address _to, uint256 _tokenId)',
         ]);
 
+        console.log('safeTransferFrom', senderAddress, receiverAddress, this.tokenId);
+
         const encodedData = erc20Interface.encodeFunctionData('safeTransferFrom', [
             senderAddress,
             receiverAddress,
