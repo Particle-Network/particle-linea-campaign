@@ -46,7 +46,7 @@ const Index = (props: IProps) => {
 
             userOp.signature = signature;
 
-            const txHash = await aaHelper.sendUserOp(userOp);
+            const { txHash } = await aaHelper.sendUserOp(userOp);
 
             console.log('txHash');
             console.log(txHash);

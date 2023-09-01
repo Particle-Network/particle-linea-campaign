@@ -32,7 +32,7 @@ const Index = (props: IProps) => {
                 const signature = await provider.getSigner().signMessage(userOpHash);
                 userOp.signature = signature;
                 console.log('userOp', userOp);
-                const txHash = await aaHelper.sendUserOp(userOp);
+                const { txHash } = await aaHelper.sendUserOp(userOp);
                 console.log(`UserOperation included: ${ComboTestnet.blockExplorerUrl}/tx/${txHash}`);
                 notification.success({
                     message: 'Claim tUSDC Success',

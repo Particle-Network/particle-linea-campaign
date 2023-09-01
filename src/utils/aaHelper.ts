@@ -18,7 +18,7 @@ const T_USDC = '0x86C1B1cE04feEA34c98E2d7A1dE760ec57892404';
 
 const T_USDT = '0xaFab613C6A8108B730801D1cC659E7393e0C0984';
 
-const ConstractAddress = '0x74883445AF29A502a1866d1E847d9B2c5fF74ac4';
+export const ConstractAddress = '0x74883445AF29A502a1866d1E847d9B2c5fF74ac4';
 
 class AAHelper {
     private bundlerProvider;
@@ -116,7 +116,7 @@ class AAHelper {
         return await this.entryPoint.getUserOpHash(userOperation);
     };
 
-    sendUserOp = async (userOp: UserOperationStruct): Promise<string> => {
+    sendUserOp = async (userOp: UserOperationStruct): Promise<{ txHash: string; receipt: any }> => {
         const userOperationHash = await this.bundlerProvider.send('eth_sendUserOperation', [
             userOp,
             ENTRY_POINT_ADDRESS,
@@ -141,7 +141,7 @@ class AAHelper {
         }
 
         const txHash = receipt.receipt.transactionHash;
-        return txHash;
+        return { txHash, receipt: receipt.receipt };
     };
 
     getTUSDCBalance = async (senderAddress: string) => {
