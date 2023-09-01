@@ -57,6 +57,6 @@ const opBNBConfig = {
     nftIcon: NftBNB,
 };
 
-export const CampaignConfig = ComboConfig;
+// export const CampaignConfig = ComboConfig;
 // export const CampaignConfig = ScrollConfig;
-// export const CampaignConfig = opBNBConfig;
+export const CampaignConfig = opBNBConfig;

@@ -40,7 +40,7 @@ const Index = (props: IProps) => {
             console.log('txHash');
             console.log(txHash);
 
-            message.success('Mint success');
+            message.success('Transfer success');
             props.onSuccess();
         } catch (error: any) {
             console.log('mint error', error);
