@@ -1,7 +1,7 @@
+import { CampaignConfig } from '@/configs';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { DownOutlined, HeartTwoTone } from '@ant-design/icons';
-import { ComboTestnet } from '@particle-network/chains';
 import { Button, Popover, Steps, message } from 'antd';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ import './index.scss';
 const Index = () => {
     const [loading, setLoading] = useState(true);
     const [currentStep, setCurrentStep] = useState(0);
-    const [address, setAddress] = useState<string>();
+    const [address, setAddress] = useState<string>('');
 
     const { particle, connected, connect, disconnect } = useParticle();
     const { aaHelper } = useAAHelper();
@@ -43,7 +43,7 @@ const Index = () => {
                 })
                 .catch((e) => console.log(e));
         } else {
-            setAddress(undefined);
+            setAddress('');
         }
     }, [aaHelper, connected]);
 
@@ -77,7 +77,7 @@ const Index = () => {
     };
 
     const onScan = () => {
-        const scanUrl = `${ComboTestnet.blockExplorerUrl}/address/${address}`;
+        const scanUrl = CampaignConfig.getScanUrl(address);
         window.open(scanUrl, '_blank');
     };
 
@@ -142,13 +142,8 @@ const Index = () => {
                 )}
             </div>
             <div className="header">
-                <div className="title">Particle @ Combo</div>
-                <div className="subtitle">
-                    COMBO is a leading provider of scaling solutions for Web3 game development. By leveraging the
-                    world's top game engine, COMBO is building an open-source, decentralized, game-oriented Layer2 that
-                    is accessible to everyone. It aims to maximize the potential of Web3 games by connecting game
-                    developers with the entire ecosystem in an efficient, affordable, and secure way.
-                </div>
+                <div className="title">{CampaignConfig.title}</div>
+                <div className="subtitle">{CampaignConfig.description}</div>
             </div>
             <div className="main">
                 <div className="main-wraper">
@@ -198,8 +193,8 @@ const Index = () => {
                 </div>
                 <div className="thanks">
                     <span>And many thanks to our friends at</span>
-                    <a href="https://combonetwork.io/" target="_blank">
-                        <img src={require('@/assest/images/Combo.png')} />
+                    <a href={CampaignConfig.homepage} target="_blank">
+                        <img src={CampaignConfig.icon} />
                     </a>
                     <span>to make this happen</span>
                 </div>

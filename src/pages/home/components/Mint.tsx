@@ -1,9 +1,8 @@
-import MintImg from '@/assest/images/NftCombo.gif';
+import { CampaignConfig } from '@/configs';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ConstractAddress } from '@/utils/aaHelper';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { ComboTestnet } from '@particle-network/chains';
 import { useAsyncEffect } from 'ahooks';
 import { Button, message, notification } from 'antd';
 import { hexStripZeros } from 'ethers/lib/utils';
@@ -62,7 +61,7 @@ const Index = (props: IProps) => {
                 message: 'Mint NFT Success',
                 description: 'Click for more details',
                 onClick: () => {
-                    window.open(`${ComboTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
+                    window.open(CampaignConfig.getBlockExplorerUrl(txHash), '_blank');
                 },
             });
             props.onSuccess();
@@ -87,7 +86,7 @@ const Index = (props: IProps) => {
         <div className="mintContainer" style={props.style}>
             <div className="title">You will get this NFT!</div>
             <div className="img">
-                <img src={MintImg} alt="" />
+                <img src={CampaignConfig.nftIcon} alt="" />
             </div>
             <div className="address-title">Your Smart Contract Account:</div>
             <div className="address-value">{address}</div>

@@ -1,7 +1,7 @@
+import { CampaignConfig } from '@/configs';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { ComboTestnet } from '@particle-network/chains';
 import { Button, Typography, message, notification } from 'antd';
 import React, { useEffect, useState } from 'react';
 
@@ -16,7 +16,7 @@ interface IProps {
 const Index = (props: IProps) => {
     const [balance, setBalance] = useState('0.0');
     const [loading, setLoading] = useState(false);
-    const [address, setAddress] = useState<string>();
+    const [address, setAddress] = useState<string>('');
     const { connected, provider } = useParticle();
     const { aaHelper } = useAAHelper();
     const { currentStep } = props;
@@ -33,12 +33,13 @@ const Index = (props: IProps) => {
                 userOp.signature = signature;
                 console.log('userOp', userOp);
                 const { txHash } = await aaHelper.sendUserOp(userOp);
-                console.log(`UserOperation included: ${ComboTestnet.blockExplorerUrl}/tx/${txHash}`);
+                const url = CampaignConfig.getBlockExplorerUrl(txHash);
+                console.log(`UserOperation included: ${url}`);
                 notification.success({
                     message: 'Claim tUSDC Success',
                     description: 'Click for more details',
                     onClick: () => {
-                        window.open(`${ComboTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
+                        window.open(url, '_blank');
                     },
                 });
             }
@@ -85,7 +86,7 @@ const Index = (props: IProps) => {
         if (currentStep === 0) {
             setLoading(false);
             setBalance('0.0');
-            setAddress(undefined);
+            setAddress('');
         }
     }, [currentStep]);
 
@@ -98,7 +99,7 @@ const Index = (props: IProps) => {
             <div
                 className="address-value"
                 onClick={() => {
-                    window.open(`${ComboTestnet.blockExplorerUrl}/address/${address}`, '_blank');
+                    window.open(CampaignConfig.getScanUrl(address), '_blank');
                 }}
             >
                 {address || ''}

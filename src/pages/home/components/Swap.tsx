@@ -1,7 +1,7 @@
+import { CampaignConfig } from '@/configs';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { ComboTestnet } from '@particle-network/chains';
 import { Button, Input, Modal, message, notification } from 'antd';
 import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react';
@@ -21,7 +21,7 @@ const Index = (props: IProps) => {
     const [hintModal, setHintModal] = useState(false);
     const [swapComplete, setSwapComplete] = useState(false);
     const [visibleError, setVisibleError] = useState(false);
-    const [txHash, setTXHash] = useState<string>();
+    const [txHash, setTXHash] = useState<string>('');
     const { connected, provider } = useParticle();
     const { aaHelper } = useAAHelper();
 
@@ -47,12 +47,13 @@ const Index = (props: IProps) => {
             console.log('userOp', userOp);
             const { txHash } = await aaHelper.sendUserOp(userOp);
             setTXHash(txHash);
-            console.log(`UserOperation included: ${ComboTestnet.blockExplorerUrl}/tx/${txHash}`);
+            const url = CampaignConfig.getBlockExplorerUrl(txHash);
+            console.log('UserOperation included:', url);
             notification.success({
                 message: 'Swap Success',
                 description: 'Click for more details',
                 onClick: () => {
-                    window.open(`${ComboTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
+                    window.open(url, '_blank');
                 },
             });
             await refreshBalance(receiverAddress);
@@ -87,7 +88,7 @@ const Index = (props: IProps) => {
             setUSDTBalance('0.0');
             setVisibleError(false);
             setLoading(false);
-            setTXHash(undefined);
+            setTXHash('');
             setSwapComplete(false);
         }
     }, [currentStep]);
@@ -126,7 +127,7 @@ const Index = (props: IProps) => {
                         className="btn-check-tx"
                         type="text"
                         onClick={() => {
-                            window.open(`${ComboTestnet.blockExplorerUrl}/tx/${txHash}`, '_blank');
+                            window.open(CampaignConfig.getBlockExplorerUrl(txHash), '_blank');
                         }}
                     >
                         Check Transaction Here

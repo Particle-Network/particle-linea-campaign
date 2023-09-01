@@ -1,4 +1,4 @@
-import MintImg from '@/assest/images/NftCombo.gif';
+import { CampaignConfig } from '@/configs';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
@@ -56,7 +56,7 @@ const Index = (props: IProps) => {
         <div className="mintContainer transferContainer" style={props.style}>
             <div className="title">Send this NFT to your Galxe</div>
             <div className="img">
-                <img src={MintImg} alt="" />
+                <img src={CampaignConfig.nftIcon} alt="" />
             </div>
             <Input
                 className="address"

@@ -1,3 +1,4 @@
+import { CampaignConfig } from '@/configs';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
@@ -22,7 +23,7 @@ const Index = (props: IProps) => {
     return (
         <div className="completedContainer" style={props.style}>
             <div className="congratulations">Congratulations!</div>
-            <div className="finished">You have finished the quests for Particle x Combo Campaign</div>
+            <div className="finished">{CampaignConfig.finishedText}</div>
             <Button
                 className="btn-more"
                 type="primary"

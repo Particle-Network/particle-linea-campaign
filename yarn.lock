@@ -2067,10 +2067,10 @@
   resolved "https://registry.npmmirror.com/@particle-network/chains/-/chains-1.0.1.tgz#2e23c1ed24f796c2727e97b0b276af31f3cdd239"
   integrity sha512-20+JEQcoAncXOY0Iva/2A8estYXgsbe/RmRMH2QX8pFJbD388sp8/s2SJ+y//1uqNTb7VuBG8K6SdoV9VG9zag==
 
-"@particle-network/chains@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npmmirror.com/@particle-network/chains/-/chains-1.0.2.tgz#728f56ccc5cda9224baf8818a6a32162807258a1"
-  integrity sha512-Fp57qIUe344rWXFbjGoCL2y4Khe4pusgPZzw+x8DcfzpZqCjgpVUh0gmcu8b1eSBJCrzk3UGDMNgEd4T91D50w==
+"@particle-network/chains@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.npmmirror.com/@particle-network/chains/-/chains-1.0.4.tgz#e9107d085c980e1513b0c9620480de568f7f7513"
+  integrity sha512-gzU7VMQLOD1a80jeIG/Rh68SDRiozD1GAZaJ+ONS+3TDRrtTGAXQnRfDH1Ps5kybynrTz1MS77ZM0IRrvEdrDg==
 
 "@particle-network/crypto@^1.0.0":
   version "1.0.0"
