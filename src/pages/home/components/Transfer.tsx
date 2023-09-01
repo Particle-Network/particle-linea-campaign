@@ -65,10 +65,10 @@ const Index = (props: IProps) => {
 
     return (
         <div className="mintContainer transferContainer" style={props.style}>
+            <div className="title">Send this NFT to your Galxe</div>
             <div className="img">
                 <img src={MintImg} alt="" />
             </div>
-            <div className="address-title">Transfer to Smart Contract Account:</div>
             <Input
                 className="address"
                 value={receiverAddress}
@@ -77,7 +77,7 @@ const Index = (props: IProps) => {
                 }}
             />
             <Button className="btn-mint" type="primary" onClick={handleTransfer} loading={loading}>
-                <span className="btn-text">Transfer</span>
+                <span className="btn-text">Gasless Transfer</span>
                 <ArrowRightOutlined />
             </Button>
         </div>

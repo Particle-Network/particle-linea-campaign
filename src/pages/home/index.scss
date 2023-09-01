@@ -272,7 +272,7 @@ body {
             }
         }
         .thanks {
-            margin-top: 8px;
+            margin-top: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -282,8 +282,7 @@ body {
             line-height: 20px;
             color: #ffffff;
             img {
-                width: 121px;
-                height: 43px;
+                height: 24px;
             }
         }
         .reserved {
@@ -291,6 +290,7 @@ body {
             font-size: 16px;
             line-height: 20px;
             color: #787878;
+            margin-top: 24px;
         }
     }
 }
@@ -360,6 +360,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    &.btn-mint {
+        width: 280px;
+    }
     .btn-text {
         background: linear-gradient(88.82deg, #e85fd4 0.8%, #685fee 98.99%);
         -webkit-background-clip: text;
@@ -527,14 +530,6 @@ body {
     }
     .btn-mint {
         margin-top: 40px;
-    }
-    &.transferContainer {
-        .img {
-            margin-top: 0;
-        }
-        .address-title {
-            margin-top: 24px;
-        }
     }
 }
 
@@ -765,13 +760,13 @@ body {
             }
             .reserved {
                 padding: 12px;
+                margin-top: 12px;
             }
         }
     }
     .loginContainer .btn-login,
     .claimContainer .btn-claim,
     .swapContainer .btn-swap,
-    .mintContainer .btn-mint,
     .connectContainer .btn-connect,
     .completedContainer .btn-more {
         width: 180px;

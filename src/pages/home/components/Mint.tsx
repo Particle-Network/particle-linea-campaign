@@ -64,7 +64,7 @@ const Index = (props: IProps) => {
             <div className="address-title">Your Smart Contract Account:</div>
             <div className="address-value">{address}</div>
             <Button className="btn-mint" type="primary" onClick={handleMint} loading={loading}>
-                <span className="btn-text">Mint</span>
+                <span className="btn-text">Gasless Mint</span>
                 <ArrowRightOutlined />
             </Button>
         </div>
