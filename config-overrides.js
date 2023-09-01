@@ -29,15 +29,6 @@ module.exports = function override(config, env) {
         })
     );
 
-    if (process.env.REACT_APP_PARTICLE_ENV === 'production') {
-        config.optimization.minimizer[0].options.minimizer.options.compress = {
-            warnings: true,
-            drop_console: true,
-            drop_debugger: true,
-            pure_funcs: ['console.log', 'console.table'],
-        };
-    }
-
     config.module.rules.push({
         test: /\.m?js/,
         resolve: {

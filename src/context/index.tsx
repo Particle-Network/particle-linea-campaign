@@ -1,12 +1,10 @@
-import { CampaignConfig } from '@/configs';
+import { CampaignConfig, EnvData } from '@/configs';
 import type { UserInfo } from '@particle-network/auth';
 import { AuthTypes, ParticleNetwork } from '@particle-network/auth';
 import { ParticleProvider } from '@particle-network/provider';
 import { ethers } from 'ethers';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import AAHelper from '../utils/aaHelper';
-
-window.__PARTICLE_ENVIRONMENT__ = process.env.REACT_APP_PARTICLE_ENV;
 
 interface GlobalState {
     particle: ParticleNetwork;
@@ -26,9 +24,9 @@ export const GlobalContextProvider = (props: any) => {
 
     const particle = useMemo(() => {
         return new ParticleNetwork({
-            projectId: process.env.REACT_APP_PROJECT_ID as string,
-            clientKey: process.env.REACT_APP_CLIENT_KEY as string,
-            appId: process.env.REACT_APP_APP_ID as string,
+            projectId: EnvData.PROJECT_ID,
+            clientKey: EnvData.CLIENT_KEY,
+            appId: EnvData.APP_ID,
             chainName: CampaignConfig.Chain.name,
             chainId: CampaignConfig.Chain.id,
             wallet: {

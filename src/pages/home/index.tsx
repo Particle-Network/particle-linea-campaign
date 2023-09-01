@@ -1,4 +1,5 @@
 import { CampaignConfig } from '@/configs';
+import { getCurrentChainName, showChainSelector } from '@/configs/chain';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { DownOutlined, HeartTwoTone } from '@ant-design/icons';
@@ -108,6 +109,15 @@ const Index = () => {
                     }}
                 >
                     下一步
+                </Button>
+                <Button
+                    type="primary"
+                    danger
+                    onClick={() => {
+                        showChainSelector();
+                    }}
+                >
+                    {getCurrentChainName() || '选择活动'}
                 </Button>
             </div>
             <div className="container-mask-left-top" />

@@ -5,6 +5,29 @@ import NftScroll from '@/assest/images/NftScroll.gif';
 import ScrollIcon from '@/assest/images/Scroll.png';
 import opBNBIcon from '@/assest/images/opBNB.png';
 import { ComboTestnet, ScrollSepolia, opBNB } from '@particle-network/chains';
+import { getCurrentChainId } from './chain';
+
+const isDevelopment = Boolean(window.location.port);
+
+const isDebug = window.location.host.includes('debug');
+
+const isProduction = !isDevelopment && !isDebug;
+
+window.__PARTICLE_ENVIRONMENT__ = isProduction ? 'production' : 'development';
+
+const DebugEnv = {
+    PROJECT_ID: 'bf90c148-e0f8-46ac-9ccd-c947bb8c2e4a',
+    CLIENT_KEY: 'cSuaEDxwyRbonAjPGrTZDJTPDwYQUJ4yqc4HryET',
+    APP_ID: 'aaf93c07-a10a-420b-99e2-686c125f6e8f',
+};
+
+const ProductionEnv = {
+    PROJECT_ID: '4ae419ad-9ac8-494a-bd5f-276168f44d8b',
+    CLIENT_KEY: 'cPWgNfkacly7D7Y7UrF1u18TTNcxQQ2EIyfM0iAO',
+    APP_ID: 'faa97695-6142-433d-aa3f-7fbe554dd2fc',
+};
+
+export const EnvData = isProduction ? ProductionEnv : DebugEnv;
 
 const ComboConfig = {
     Chain: ComboTestnet,
@@ -57,6 +80,10 @@ const opBNBConfig = {
     nftIcon: NftBNB,
 };
 
-// export const CampaignConfig = ComboConfig;
-// export const CampaignConfig = ScrollConfig;
-export const CampaignConfig = opBNBConfig;
+const ConfigMap = {
+    [ComboTestnet.id]: ComboConfig,
+    [ScrollSepolia.id]: ScrollConfig,
+    [opBNB.id]: opBNBConfig,
+};
+
+export const CampaignConfig = ConfigMap[getCurrentChainId()];
