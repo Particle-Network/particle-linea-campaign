@@ -488,9 +488,9 @@ body {
     .img {
         width: 140px;
         height: 140px;
+        background: #000;
         margin-top: 24px;
         img {
-            width: 100%;
             height: 100%;
         }
     }
@@ -510,8 +510,11 @@ body {
         font-family: Inter;
         font-size: 14px;
         font-style: normal;
-        line-height: 18px;
+        line-height: 28px;
         margin-top: 8px;
+        height: 28px;
+        border-bottom: 1px solid #7c16a0;
+        background: rgba(0, 0, 0, 0.2);
     }
     .address {
         width: 400px;
@@ -519,15 +522,19 @@ body {
         font-weight: 500;
         font-size: 20px;
         color: #be46e8;
-        background: rgba(0, 0, 0, 0.5);
         border-radius: 4px;
         padding: 0 12px;
         height: 50px;
         padding: 5px;
         margin-top: 28px;
+        border-bottom: 1px solid #7c16a0;
+        background: rgba(0, 0, 0, 0.2);
         &:focus {
-            border-color: transparent;
+            border-bottom: 1px solid #7c16a0;
             box-shadow: none;
+        }
+        &::placeholder {
+            font-size: 16px;
         }
     }
     .btn-mint {

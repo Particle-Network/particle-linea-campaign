@@ -61,16 +61,20 @@ export const getCurrentChainId = () => {
     if (!isDevelopment) {
         const { host } = window.location;
         if (host.includes('combo')) {
+            document.title = ['Particle ❤', ComboTestnet.name, 'Chain'].join(' ');
             return ComboTestnet.id;
         }
         if (host.includes('scroll')) {
+            document.title = ['Particle ❤', ScrollSepolia.name, 'Chain'].join(' ');
             return ScrollSepolia.id;
         }
         if (host.includes('opbnb')) {
+            document.title = ['Particle ❤', opBNB.name, 'Chain'].join(' ');
             return opBNB.id;
         }
         throw new Error('未知域名');
     }
+    document.title = ['Particle ❤', getCurrentChainName(), 'Chain'].join(' ');
     if (!ChainList.map((v) => v.id).includes(Number(chainId))) {
         return ChainList[0].id;
     }
@@ -81,5 +85,3 @@ export const getCurrentChainName = () => {
     const currentChain = ChainList.find((v) => v.id === chainId);
     return currentChain?.name ?? '';
 };
-
-document.title = ['Particle ❤', getCurrentChainName(), 'Chain'].join(' ');
