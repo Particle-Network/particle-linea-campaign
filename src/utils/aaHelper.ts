@@ -1,4 +1,3 @@
-import nftABI from '@/assest/abi/nft.json';
 import tUSDCABI from '@/assest/abi/tUSDC.json';
 import type { UserOperationStruct } from '@account-abstraction/contracts';
 import {
@@ -25,6 +24,7 @@ class AAHelper {
     private paymasterProvider;
     private simpleAccountFactory;
     private entryPoint;
+    private tokenId;
     constructor(private provider: ethers.providers.Web3Provider, chainInfo: ChainInfo) {
         this.bundlerProvider = new StaticJsonRpcProvider(
             `https://bundler-debug.particle.network?chainId=${chainInfo.id}`
@@ -37,6 +37,7 @@ class AAHelper {
             this.provider
         );
         this.entryPoint = EntryPoint__factory.connect(ENTRY_POINT_ADDRESS, this.provider);
+        this.tokenId = null as null | number;
     }
 
     getInitCode = async (): Promise<string> => {
@@ -226,6 +227,10 @@ class AAHelper {
         return userOperation;
     };
 
+    setTokenId = (tokenId: number) => {
+        this.tokenId = tokenId;
+    };
+
     createMintOp = async (): Promise<UserOperationStruct> => {
         const senderAddress = await this.getSenderAddress();
 
@@ -282,7 +287,7 @@ class AAHelper {
         const encodedData = erc20Interface.encodeFunctionData('safeTransferFrom', [
             senderAddress,
             receiverAddress,
-            '2',
+            this.tokenId,
         ]);
 
         const to = ConstractAddress;
@@ -317,13 +322,6 @@ class AAHelper {
 
         userOperation.paymasterAndData = paymasterAndData;
         return userOperation;
-    };
-
-    getNftBalance = async (senderAddress: string) => {
-        const contract = new ethers.Contract(ConstractAddress, nftABI, this.provider);
-        const balance = await contract.balanceOf(senderAddress);
-        console.log('balance', balance, balance.toNumber());
-        return balance.toNumber();
     };
 }
 

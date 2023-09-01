@@ -24,17 +24,6 @@ const Index = (props: IProps) => {
             return;
         }
 
-        try {
-            const balance = await aaHelper.getNftBalance(receiverAddress);
-            if (balance >= 1) {
-                message.error('You already mint this NFT to this address');
-                return;
-            }
-        } catch (error: any) {
-            message.error(error.message);
-            return;
-        }
-
         setLoading(true);
 
         try {
