@@ -29,24 +29,35 @@ const Index = (props: IProps) => {
             const userOp = await aaHelper.createMintOp();
 
             const userOpHash = await aaHelper.hashUserOp(userOp);
+
             console.log('userOpHash', userOpHash);
+
             const signature = await provider.getSigner().signMessage(userOpHash);
 
             userOp.signature = signature;
 
             const { txHash, receipt } = await aaHelper.sendUserOp(userOp);
+
             const txLog = receipt?.logs?.find(
                 (log: any) =>
-                    log.address === ConstractAddress &&
+                    log.address.toLowerCase() === ConstractAddress.toLowerCase() &&
                     log.topics.length === 4 &&
                     Number(log.topics[1]) === 0 &&
                     hexStripZeros(log.topics[2]).toLowerCase() === address.toLowerCase()
             );
+
+            console.log('receipt', receipt);
+            console.log('txLog', txLog);
+            console.log(txLog?.topics[3]);
+
             const tokenId = Number(txLog?.topics[3]);
 
-            console.log(`txHash: ${txHash},tokenId: ${tokenId}`);
+            aaHelper.setTokenId(tokenId);
+
+            console.log('txHash', txHash, 'tokenId', tokenId);
 
             message.success('Mint success');
+
             notification.success({
                 message: 'Mint NFT Success',
                 description: 'Click for more details',
@@ -74,7 +85,7 @@ const Index = (props: IProps) => {
 
     return (
         <div className="mintContainer" style={props.style}>
-            <div className="title">You wil get this NFT!</div>
+            <div className="title">You will get this NFT!</div>
             <div className="img">
                 <img src={MintImg} alt="" />
             </div>
