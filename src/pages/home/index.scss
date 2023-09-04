@@ -823,3 +823,14 @@ body {
         }
     }
 }
+
+// 适配PC端, 高度小于 1150px
+// 尽量一屏显示
+@media screen and (max-height: 1150px) {
+    .container {
+        padding-top: 24px;
+        .footer {
+            padding: 48px 0 24px;
+        }
+    }
+}
