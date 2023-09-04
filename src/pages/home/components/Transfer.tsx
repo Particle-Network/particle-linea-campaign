@@ -61,7 +61,7 @@ const Index = (props: IProps) => {
 
     return (
         <div className="mintContainer transferContainer" style={props.style}>
-            <div className="title">Send this NFT to your Galxe Wallet</div>
+            <div className="title">Send to your Wallet used in Galxe</div>
             <div className="img">
                 <img src={CampaignConfig.nftIcon} alt="" />
             </div>
