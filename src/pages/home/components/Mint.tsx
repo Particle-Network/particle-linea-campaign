@@ -77,7 +77,6 @@ const Index = (props: IProps) => {
 
     return (
         <div className="mintContainer" style={props.style}>
-            <div className="title">You will get this NFT!</div>
             <div className="img">
                 <img src={CampaignConfig.nftIcon} alt="" />
             </div>
