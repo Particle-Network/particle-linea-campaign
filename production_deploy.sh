@@ -10,6 +10,7 @@ timestamp=$(date +%s)
 
 # build & publish
 yarn install &&
+    yarn build &&
     echo "\033[32m \nBuild success\n \033[0m" &&
     cp ${sourceDir}/index.html ${sourceDir}/index.html.backup.${timestamp} &&
     ossutilmac64 cp -r -f --exclude "index.html" ${sourceDir}/ oss://${bucketName1}/ &&
