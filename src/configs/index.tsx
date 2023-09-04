@@ -1,7 +1,7 @@
 import ComboIcon from '@/assest/images/Combo.png';
-import NftBNB from '@/assest/images/NftBNB.gif';
-import NftCombo from '@/assest/images/NftCombo.gif';
-import NftScroll from '@/assest/images/NftScroll.gif';
+import NftBNB from '@/assest/images/NftBNB.png';
+import NftCombo from '@/assest/images/NftCombo.png';
+import NftScroll from '@/assest/images/NftScroll.png';
 import ScrollIcon from '@/assest/images/Scroll.png';
 import opBNBIcon from '@/assest/images/opBNB.png';
 import { ComboTestnet, ScrollSepolia, opBNB } from '@particle-network/chains';
