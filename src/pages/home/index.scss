@@ -824,3 +824,44 @@ body {
         }
     }
 }
+
+.message-success {
+    .ant-message-notice-content {
+        width: 460px;
+        padding: 24px 30px;
+        border-radius: 25px;
+        cursor: pointer;
+        .ant-message-custom-content {
+            display: flex;
+        }
+    }
+    .anticon {
+        width: 60px;
+        height: 60px;
+        background: #58c08f;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 35px;
+    }
+    .message-success-title {
+        color: #000;
+        text-align: center;
+        font-family: Inter;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+    .message-success-description {
+        margin-top: 8px;
+        color: #000;
+        text-align: center;
+        font-family: Inter;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+}

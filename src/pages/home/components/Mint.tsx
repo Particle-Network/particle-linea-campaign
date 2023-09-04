@@ -1,11 +1,16 @@
+import { ReactComponent as CheckOutlined } from '@/assest/images/CheckOutlined.svg';
 import { CampaignConfig } from '@/configs';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ConstractAddress } from '@/utils/aaHelper';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useAsyncEffect } from 'ahooks';
-import { Button, message, notification } from 'antd';
+import { Button, message } from 'antd';
 import { useState } from 'react';
+
+message.config({
+    top: 40,
+});
 
 interface IProps {
     style: React.CSSProperties;
@@ -50,13 +55,24 @@ const Index = (props: IProps) => {
 
             console.log('txHash', txHash, 'tokenId', tokenId);
 
-            notification.success({
-                message: 'Mint NFT Success',
-                description: 'Click for more details',
+            message.success({
+                className: 'message-success',
+                icon: (
+                    <div className="anticon">
+                        <CheckOutlined />
+                    </div>
+                ),
+                content: (
+                    <>
+                        <div className="message-success-title">Mint NFT Success</div>
+                        <div className="message-success-description">Click for more details</div>
+                    </>
+                ),
                 onClick: () => {
                     window.open(CampaignConfig.getBlockExplorerUrl(txHash), '_blank');
                 },
             });
+
             props.onSuccess();
         } catch (error: any) {
             console.log('mint error', error);
