@@ -232,7 +232,12 @@ class AAHelper {
         const senderAddress = await this.getSenderAddress();
 
         const code = await this.provider.getCode(senderAddress);
+
+        console.log('code', code);
+
         const initCode = code === '0x' ? await this.getInitCode() : '0x';
+
+        console.log('initCode', initCode);
 
         const erc20Interface = new ethers.utils.Interface(['function safeMint(address _to)']);
         const encodedData = erc20Interface.encodeFunctionData('safeMint', [senderAddress]);

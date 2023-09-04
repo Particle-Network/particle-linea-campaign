@@ -37,6 +37,8 @@ const Index = (props: IProps) => {
 
             const signature = await provider.getSigner().signMessage(userOpHash);
 
+            console.log('signature', signature);
+
             userOp.signature = signature;
 
             const { txHash, receipt } = await aaHelper.sendUserOp(userOp);
