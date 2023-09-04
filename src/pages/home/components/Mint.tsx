@@ -50,8 +50,6 @@ const Index = (props: IProps) => {
 
             console.log('txHash', txHash, 'tokenId', tokenId);
 
-            message.success('Mint success');
-
             notification.success({
                 message: 'Mint NFT Success',
                 description: 'Click for more details',

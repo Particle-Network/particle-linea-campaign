@@ -2,7 +2,7 @@ import { CampaignConfig } from '@/configs';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Button, Input, message } from 'antd';
+import { Button, Input, message, notification } from 'antd';
 import { useState } from 'react';
 
 interface IProps {
@@ -40,7 +40,14 @@ const Index = (props: IProps) => {
             console.log('txHash');
             console.log(txHash);
 
-            message.success('Transfer success');
+            notification.success({
+                message: 'Transfer NFT Success',
+                description: 'Click for more details',
+                onClick: () => {
+                    window.open(CampaignConfig.getBlockExplorerUrl(txHash), '_blank');
+                },
+            });
+
             props.onSuccess();
         } catch (error: any) {
             console.log('mint error', error);
