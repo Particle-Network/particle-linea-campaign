@@ -79,6 +79,7 @@ const ComboConfig = {
     },
     finishedText: 'You have finished the quests for Particle x Combo Campaign',
     nftIcon: NftCombo,
+    CampaignLink: 'https://galxe.com/ParticleNetwork/campaign/GCLJmUBPYg',
 };
 
 const ScrollConfig = {
@@ -97,6 +98,7 @@ const ScrollConfig = {
     },
     finishedText: 'You have finished the quests for Particle x Scroll Campaign',
     nftIcon: NftScroll,
+    CampaignLink: 'https://galxe.com/ParticleNetwork/campaign/GCVcLUH9fe',
 };
 
 const opBNBConfig = {
@@ -115,6 +117,7 @@ const opBNBConfig = {
     },
     finishedText: 'You have finished the quests for Particle x opBNB Campaign',
     nftIcon: NftBNB,
+    CampaignLink: 'https://galxe.com/ParticleNetwork/campaign/GCorLUHaZn',
 };
 
 const ConfigMap = {
