@@ -274,7 +274,7 @@ class AAHelper {
 
         userOperation.paymasterAndData = paymasterAndData;
 
-        const sponsorUserOperationGasResult = await this.paymasterProvider.send('eth_estimateUserOperationGas', [
+        const sponsorUserOperationGasResult = await this.bundlerProvider.send('eth_estimateUserOperationGas', [
             userOperation,
             ENTRY_POINT_ADDRESS,
         ]);
@@ -336,7 +336,7 @@ class AAHelper {
 
         userOperation.paymasterAndData = paymasterAndData;
 
-        const sponsorUserOperationGasResult = await this.paymasterProvider.send('eth_estimateUserOperationGas', [
+        const sponsorUserOperationGasResult = await this.bundlerProvider.send('eth_estimateUserOperationGas', [
             userOperation,
             ENTRY_POINT_ADDRESS,
         ]);
