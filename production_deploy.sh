@@ -1,8 +1,9 @@
 #!/bin/sh
 
-bucketName1=particle-netowrk-opbnb-mainnet
-bucketName2=particle-netowrk-combo-testnet
-bucketName3=particle-netowrk-scroll-testnet
+bucketName1=pn-campaigns-opbnb-mainnet
+bucketName2=pn-campaigns-combo-testnet
+bucketName3=pn-campaigns-scroll-testnet
+
 
 sourceDir=./build
 
