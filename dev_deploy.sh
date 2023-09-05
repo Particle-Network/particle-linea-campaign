@@ -8,11 +8,11 @@ DEST3=magellan@magellan-debug:/data/code/campaigns-web/scroll-sepolia/
 
 yarn \
     && yarn build \
-    && node upgrateTitle opBNB \
+    && node updateTitle opBNB \
     && rsync --timeout=60 -avzP ${SRC}/* ${DEST1} \
-    && node upgrateTitle Combo \
+    && node updateTitle Combo \
     && rsync --timeout=60 -avzP ${SRC}/* ${DEST2} \
-    && node upgrateTitle Scroll \
+    && node updateTitle Scroll \
     && rsync --timeout=60 -avzP ${SRC}/* ${DEST3} \
     && echo "Upload success" \
     && curl -X POST -H "Content-Type: application/json" \

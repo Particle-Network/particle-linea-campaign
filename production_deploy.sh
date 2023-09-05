@@ -11,16 +11,16 @@ timestamp=$(date +%s)
 # build & publish
  yarn install  \
      && yarn build  \
-     && node upgrateTitle opBNB \
+     && node updateTitle opBNB \
      && ossutilmac64 cp -r -f --exclude "index.html" ${sourceDir}/ oss://${bucketName1}/  \
      && cp ${sourceDir}/index.html ${sourceDir}/index.html.backup.${timestamp}  \
      && ossutilmac64 cp -r -f --include "index.html*" ${sourceDir}/ oss://${bucketName1}/  \
-     && node upgrateTitle Combo \
+     && node updateTitle Combo \
      && ossutilmac64 cp -r -f --exclude "index.html" ${sourceDir}/ oss://${bucketName2}/  \
      && rm ${sourceDir}/index.html.backup.${timestamp} \
      && cp ${sourceDir}/index.html ${sourceDir}/index.html.backup.${timestamp}  \
      && ossutilmac64 cp -r -f --include "index.html*" ${sourceDir}/ oss://${bucketName2}/  \
-     && node upgrateTitle Scroll \
+     && node updateTitle Scroll \
      && ossutilmac64 cp -r -f --exclude "index.html" ${sourceDir}/ oss://${bucketName3}/  \
      && rm ${sourceDir}/index.html.backup.${timestamp} \
      && cp ${sourceDir}/index.html ${sourceDir}/index.html.backup.${timestamp}  \
