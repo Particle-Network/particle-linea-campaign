@@ -273,6 +273,16 @@ class AAHelper {
         const paymasterAndData = sponsorUserOperationResult.paymasterAndData;
 
         userOperation.paymasterAndData = paymasterAndData;
+
+        const sponsorUserOperationGasResult = await this.paymasterProvider.send('eth_estimateUserOperationGas', [
+            userOperation,
+            ENTRY_POINT_ADDRESS,
+        ]);
+
+        console.log('sponsorUserOperationGasResult', sponsorUserOperationGasResult);
+
+        Object.assign(userOperation, sponsorUserOperationGasResult);
+
         return userOperation;
     };
 
@@ -325,6 +335,16 @@ class AAHelper {
         const paymasterAndData = sponsorUserOperationResult.paymasterAndData;
 
         userOperation.paymasterAndData = paymasterAndData;
+
+        const sponsorUserOperationGasResult = await this.paymasterProvider.send('eth_estimateUserOperationGas', [
+            userOperation,
+            ENTRY_POINT_ADDRESS,
+        ]);
+
+        console.log('sponsorUserOperationGasResult', sponsorUserOperationGasResult);
+
+        Object.assign(userOperation, sponsorUserOperationGasResult);
+
         return userOperation;
     };
 }

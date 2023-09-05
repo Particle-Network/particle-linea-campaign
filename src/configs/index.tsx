@@ -100,7 +100,7 @@ const ScrollConfig = {
 };
 
 const opBNBConfig = {
-    ConstractAddress: '0x74883445AF29A502a1866d1E847d9B2c5fF74ac4',
+    ConstractAddress: '0xC1C4aa02F5B65D1A885eC5cC03B39598047390eB',
     Chain: opBNB,
     title: 'Particle @ opBNB',
     description:
