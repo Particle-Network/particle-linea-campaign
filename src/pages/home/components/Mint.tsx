@@ -2,11 +2,12 @@ import { ReactComponent as CheckOutlined } from '@/assest/images/CheckOutlined.s
 import { CampaignConfig } from '@/configs';
 import useAAHelper from '@/context/hooks/useAAHelper';
 import useParticle from '@/context/hooks/useParticle';
-import { ConstractAddress } from '@/utils/aaHelper';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useAsyncEffect } from 'ahooks';
 import { Button, message } from 'antd';
 import { useState } from 'react';
+
+const { ConstractAddress } = CampaignConfig;
 
 message.config({
     top: 40,

@@ -64,6 +64,7 @@ export const PaymasterApiPrefix = [
 export const EnvData = (isProduction ? ProductionEnv : DebugEnv)[getCurrentChainId()];
 
 const ComboConfig = {
+    ConstractAddress: '0x5bA7C86EEc21eCC5C5edBb720e4A52c851F7e2a6',
     Chain: ComboTestnet,
     title: 'Particle @ Combo',
     description:
@@ -81,6 +82,7 @@ const ComboConfig = {
 };
 
 const ScrollConfig = {
+    ConstractAddress: '0xC1C4aa02F5B65D1A885eC5cC03B39598047390eB',
     Chain: ScrollSepolia,
     title: 'Particle @ Scroll',
     description:
@@ -98,6 +100,7 @@ const ScrollConfig = {
 };
 
 const opBNBConfig = {
+    ConstractAddress: '0x74883445AF29A502a1866d1E847d9B2c5fF74ac4',
     Chain: opBNB,
     title: 'Particle @ opBNB',
     description:

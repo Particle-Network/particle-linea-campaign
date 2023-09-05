@@ -1,5 +1,5 @@
 import tUSDCABI from '@/assest/abi/tUSDC.json';
-import { BundlerApiPrefix, PaymasterApiPrefix } from '@/configs';
+import { BundlerApiPrefix, CampaignConfig, PaymasterApiPrefix } from '@/configs';
 import type { UserOperationStruct } from '@account-abstraction/contracts';
 import {
     EntryPoint__factory,
@@ -18,7 +18,7 @@ const T_USDC = '0x86C1B1cE04feEA34c98E2d7A1dE760ec57892404';
 
 const T_USDT = '0xaFab613C6A8108B730801D1cC659E7393e0C0984';
 
-export const ConstractAddress = '0x74883445AF29A502a1866d1E847d9B2c5fF74ac4';
+const { ConstractAddress } = CampaignConfig;
 
 class AAHelper {
     private bundlerProvider;
