@@ -98,7 +98,7 @@ const Index = (props: IProps) => {
             <div className="img">
                 <img src={CampaignConfig.nftIcon} alt="" />
             </div>
-            <div className="address-title">Your Smart Contract Account</div>
+            <div className="address-title">Your Smart Account</div>
             <div
                 className="address-value"
                 onClick={() => {
