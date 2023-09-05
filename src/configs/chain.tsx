@@ -61,15 +61,12 @@ export const getCurrentChainId = () => {
     if (!isDevelopment) {
         const { host } = window.location;
         if (host.includes('combo')) {
-            document.title = ['Particle ❤', ComboTestnet.name, 'Chain'].join(' ');
             return ComboTestnet.id;
         }
         if (host.includes('scroll')) {
-            document.title = ['Particle ❤', ScrollSepolia.name, 'Chain'].join(' ');
             return ScrollSepolia.id;
         }
         if (host.includes('opbnb')) {
-            document.title = ['Particle ❤', opBNB.name, 'Chain'].join(' ');
             return opBNB.id;
         }
         throw new Error('未知域名');
