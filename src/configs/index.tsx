@@ -66,7 +66,7 @@ export const EnvData = (isProduction ? ProductionEnv : DebugEnv)[getCurrentChain
 const ComboConfig = {
     ConstractAddress: '0x5bA7C86EEc21eCC5C5edBb720e4A52c851F7e2a6',
     Chain: ComboTestnet,
-    title: 'Particle @ Combo',
+    title: 'Particle @ COMBO',
     description:
         "COMBO is a leading provider of scaling solutions for Web3 game development. By leveraging the world's top game engine, COMBO is building an open-source, decentralized, game-oriented Layer2 that is accessible to everyone. It aims to maximize the potential of Web3 games by connecting game developers with the entire ecosystem in an efficient, affordable, and secure way.",
     homepage: 'https://combonetwork.io/',
